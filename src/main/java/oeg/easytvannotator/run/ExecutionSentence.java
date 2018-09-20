@@ -18,10 +18,6 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
-import oeg.easytvannotator.babelnet.BabelNetInterface;
-import oeg.easytvannotator.nlpinterfaces.IxaInterface;
-import oeg.easytvannotator.nlpinterfaces.StanfordInterface;
-import oeg.easytvannotator.nlpinterfaces.TreeTaggerInterface;
 import oeg.easytvannotator.model.ESentence;
 import oeg.easytvannotator.model.EToken;
 import oeg.easytvannotator.model.EasyTVInterface;
@@ -38,8 +34,8 @@ public class ExecutionSentence {
 
         //String InputFile = "Ο δάσκαλος εξήγησε το μάθημα στην τάξη";   String Lang = "EL";
 
-       // String string = "he visto esta película tres veces";   String Lang = "ES";
-        String string = "Ho visto questo film tre volte";   String Lang = "IT";
+        String string = "he visto esta película tres veces";   String Lang = "ES";
+        //String string = "Ho visto questo film tre volte";   String Lang = "IT";
         //String InputFile = "The teacher explained the lesson";
         //String Lang = "EN";
         

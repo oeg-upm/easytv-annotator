@@ -64,7 +64,8 @@ public class IxaDemo {
        IxaDemo exec= new IxaDemo();
 
        //String sentence=readFile("../CORPORA/Plain/Wikipedia/es/Angus Young.txt");
-       String sentence = "El chocolate negro es muy amargo. El chocolate blanco es dulce.";
+       //String sentence = "El chocolate negro es muy amargo. El chocolate blanco es dulce.";
+       String sentence="he visto esta película tres veces";
        exec.initProperties();
        exec.findEntities(sentence);
        

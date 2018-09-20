@@ -32,6 +32,11 @@ public class EToken {
     public  List<String> WordBabelblySemanticAnnotations;
     public List<String> LemmaBabelblySemanticAnnotations;
     
+    public String Order;
+    public String Start;
+    public String End;
+    
+    
     public EToken (String word,String POS, String Lemma,String Stemm, String Language){
     
         Word=word;
@@ -114,6 +119,14 @@ public class EToken {
         s= s.substring(0, s.length()-1);
         }
         return s;
+    
+    }
+
+    public void copyVideoInforamtion(segment seg) {
+        
+        this.Order=seg.getOrder();
+        this.Start=seg.getStart();
+        this.End=seg.getEnd();
     
     }
     

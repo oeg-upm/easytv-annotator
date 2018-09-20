@@ -52,6 +52,8 @@ public class BabelNetDemo {
      callBabelNetWordPOS("conducir",Language.ES ,UniversalPOS.VERB);
     }
     
+   
+    
     
      public static List<BabelSynset> callBabelNetWordPOS(String word, Language lang, UniversalPOS pos)  {
 

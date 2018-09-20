@@ -20,7 +20,7 @@ public class NLPInterface {
     
     
     public IxaInterface SpanishLib;
-    public IxaInterface ItalianLib;
+    //public IxaInterface ItalianLib;
     public StanfordInterface EnglishLib;
     public TreeTaggerInterface GreekLib;
     
@@ -31,7 +31,7 @@ public class NLPInterface {
         SpanishLib = new IxaInterface(RootPath,"es");
         
         
-        ItalianLib = new IxaInterface(RootPath,"it");
+        //ItalianLib = new IxaInterface(RootPath,"it");
         
         EnglishLib= new StanfordInterface();
         
@@ -51,7 +51,7 @@ public class NLPInterface {
         }
 
         if (Language.equals("it")) {
-            return ItalianLib.parseSentence(Sentence, Language);
+            //return ItalianLib.parseSentence(Sentence, Language);
         }
 
         if (Language.equals("cat")) {
