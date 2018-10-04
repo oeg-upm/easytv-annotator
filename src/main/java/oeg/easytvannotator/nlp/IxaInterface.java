@@ -10,7 +10,6 @@ import eus.ixa.ixa.pipe.ml.utils.Flags;
 import eus.ixa.ixa.pipe.parse.ConstituentParsing;
 import eus.ixa.ixa.pipe.pos.Annotate;
 import eus.ixa.ixa.pipe.pos.CLI;
-import ixa.kaflib.Entity;
 import ixa.kaflib.KAFDocument;
 import ixa.kaflib.Term;
 import java.io.BufferedReader;
@@ -22,7 +21,6 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import oeg.easytvannotator.demos.IxaDemo;
 import oeg.easytvannotator.model.ESentence;
 
 /**

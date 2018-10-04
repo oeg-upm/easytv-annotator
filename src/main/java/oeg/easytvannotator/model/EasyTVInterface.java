@@ -100,4 +100,25 @@ public class EasyTVInterface {
     }
 
     
+    public InputService processJson2( InputService input) {
+
+        this.input=input;
+        String Sentence = input.getVideo().getNls().trim();
+        String Language=input.getVideo().getLanguage();
+
+        System.out.println("Recieved: " + Sentence + "  Lang:" + Language);
+
+        
+        
+        // SENTENCE
+        this.Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
+        //BABELNET
+        BabelNetInterface.callBabelNet(Esentence, Language);
+
+        // Associate Videos
+        this.Esentence.associateVideos(input);
+        return input;
+
+    }
+
 }

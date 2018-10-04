@@ -38,7 +38,8 @@ public class ESentence {
             for(segment seg:input.getVideo().getSegments()){
                 
                 if(tok.Word.equals(seg.getContent())){
-                    tok.copyVideoInforamtion(seg);
+                   // tok.copyVideoInforamtion(seg);
+                    seg.copyTokenInformation(tok);
                     break;
                 }
             }

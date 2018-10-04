@@ -38,6 +38,7 @@ public class EToken {
     public String End;
     
     
+    
     public EToken (String word,String POS, String Lemma,String Stemm, String Language){
     
         Word=word;
@@ -124,7 +125,7 @@ public class EToken {
     
     }
 
-<<<<<<< HEAD
+
     public void cleanSynsets() {
         
         List <BabelSynset> newSynsetList=new ArrayList();
@@ -149,15 +150,16 @@ public class EToken {
         }
         this.LemmaSynsets=newSynsetList;
         
-=======
+    }
+    
     public void copyVideoInforamtion(segment seg) {
         
         this.Order=seg.getOrder();
         this.Start=seg.getStart();
         this.End=seg.getEnd();
     
->>>>>>> 3bd457b194fd6c3c99bde7ad8689725e64c28a8d
     }
+    
     
     
     

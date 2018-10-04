@@ -19,8 +19,11 @@ import java.util.logging.Logger;
 import oeg.easytvannotator.model.ESentence;
 import oeg.easytvannotator.model.EToken;
 import com.babelscape.util.UniversalPOS;
+import it.uniroma1.lcl.babelnet.BabelNetConfiguration;
 import it.uniroma1.lcl.babelnet.BabelNetQuery;
 import it.uniroma1.lcl.babelnet.data.BabelSenseSource;
+import it.uniroma1.lcl.jlt.Configuration;
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -39,6 +42,31 @@ public class BabelNetInterface {
     
     public static BabelNet bnInstance;
     
+    
+    public static boolean serviceweb=false;
+    
+    public static String ContextPath;
+    
+    public static void initInstance(){
+    
+        if(serviceweb){
+        // context.getRealPath("/") 
+        Configuration jltConfiguration = Configuration.getInstance();
+          jltConfiguration.setConfigurationFile(new File( ContextPath + "WEB-INF/config/jlt.properties"));
+
+          BabelNetConfiguration bnconf = BabelNetConfiguration.getInstance();
+          bnconf.setConfigurationFile(new File(ContextPath + "/WEB-INF/config/babelnet.properties"));
+          bnconf.setBasePath(ContextPath+ "/WEB-INF/");
+          //BabelNet bn =  BabelNet.getInstance();
+            bnInstance=  BabelNet.getInstance();
+            return; 
+                   
+        }
+        
+         bnInstance = BabelNet.getInstance();
+    
+    
+    }
   
     
     public static List<BabelSynset> callBabelNetWord(String word, Language lang)  {
@@ -46,7 +74,8 @@ public class BabelNetInterface {
         List<BabelSynset> synsets =new ArrayList();
         try {
             if (bnInstance == null) {
-                bnInstance = BabelNet.getInstance();
+                //bnInstance = BabelNet.getInstance();
+                initInstance();
             }
 
             
@@ -94,7 +123,7 @@ public class BabelNetInterface {
 
         try {
             if (bnInstance == null) {
-                bnInstance = BabelNet.getInstance();
+                initInstance();//bnInstance = BabelNet.getInstance();
             }
             
 
@@ -149,7 +178,7 @@ public class BabelNetInterface {
 
         try {
             if (bnInstance == null) {
-                bnInstance = BabelNet.getInstance();
+                initInstance();//bnInstance = BabelNet.getInstance();
             }
 
             BabelNetQuery query = new BabelNetQuery.Builder(word)
