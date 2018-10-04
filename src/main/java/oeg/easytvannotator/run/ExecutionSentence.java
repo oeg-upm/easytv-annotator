@@ -19,9 +19,9 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import oeg.easytvannotator.babelnet.BabelNetInterface;
-import oeg.easytvannotator.nlpinterfaces.IxaInterface;
-import oeg.easytvannotator.nlpinterfaces.StanfordInterface;
-import oeg.easytvannotator.nlpinterfaces.TreeTaggerInterface;
+import oeg.easytvannotator.nlp.IxaInterface;
+import oeg.easytvannotator.nlp.StanfordInterface;
+import oeg.easytvannotator.nlp.TreeTaggerInterface;
 import oeg.easytvannotator.model.ESentence;
 import oeg.easytvannotator.model.EToken;
 import oeg.easytvannotator.model.EasyTVInterface;
@@ -38,13 +38,18 @@ public class ExecutionSentence {
 
         //String InputFile = "Ο δάσκαλος εξήγησε το μάθημα στην τάξη";   String Lang = "EL";
 
-       // String string = "he visto esta película tres veces";   String Lang = "ES";
-        String string = "Ho visto questo film tre volte";   String Lang = "IT";
+        
+
+        //String string = "he visto esta película tres veces";   String Lang = "ES";
+        String string = "Vi una película subtitulada anoche";   String Lang = "ES";
+       // String string = "Ho visto questo film tre volte";   String Lang = "IT";
         //String InputFile = "The teacher explained the lesson";
         //String Lang = "EN";
         
         EasyTVInterface.processLine("",Lang, string);
-        print(EasyTVInterface.sentences);
+        EasyTVInterface.printSentences();
+        
+        
 
     }
 
@@ -52,21 +57,7 @@ public class ExecutionSentence {
 
    
 
-    public static void print(List<ESentence> sentences) {
-
-        for (ESentence sentence : sentences) {
-
-            System.out.println("Sentence: " + sentence.OriginalText);
-
-            for (EToken token : sentence.ListTokens) {
-
-                String s = token.printResultsBabel();
-
-            }
-
-        }
-
-    }
+    
 
 
    

@@ -67,7 +67,7 @@ public class BabelNetInterface {
             Logger.getLogger(BabelNetInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
          if(synsets.size()>4){
-        return synsets.subList(0, 4);
+            return synsets.subList(0, 4);
         }
         
         return synsets;
@@ -98,14 +98,14 @@ public class BabelNetInterface {
             }
             
 
-            
+            System.out.println("change");
             HashSet <BabelSenseSource> sets=new HashSet();
             sets.addAll(Arrays.asList(BabelSenseSource.BABELNET,BabelSenseSource.WN, BabelSenseSource.MCR_ES ,BabelSenseSource.MCR_CA,BabelSenseSource.OMWN_EL,BabelSenseSource.OMWN_IT));
 
             BabelNetQuery query = new BabelNetQuery.Builder(word)
                     .POS(pos)
                     .from(lang)
-                    .sources(Arrays.asList(BabelSenseSource.BABELNET,BabelSenseSource.WN, BabelSenseSource.MCR_ES ,BabelSenseSource.MCR_CA,BabelSenseSource.OMWN_EL,BabelSenseSource.OMWN_IT)) //
+                   // .sources(Arrays.asList(BabelSenseSource.BABELNET,BabelSenseSource.WN, BabelSenseSource.MCR_ES ,BabelSenseSource.MCR_CA,BabelSenseSource.OMWN_EL,BabelSenseSource.OMWN_IT)) //
                     .to(Arrays.asList(Language.EN,Language.CA, Language.EL,Language.IT))
                     .build();
 
@@ -209,6 +209,7 @@ public class BabelNetInterface {
             if (Babelpos != null) {
                 token.WordSynsets = callBabelNetWordPOS(token.Word, Langua, Babelpos);
                 token.LemmaSynsets = callBabelNetWordPOS(token.Lemma, Langua, Babelpos);
+                token.cleanSynsets();
 
             } else {
                 System.out.println("No BabelPOS for :" + token.Word + "  " + token.POS);

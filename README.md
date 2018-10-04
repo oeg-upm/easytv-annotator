@@ -10,7 +10,16 @@ TRANSLATOR PROJECT
 This project is compiled with maven and there are four libraries that are not available at maven central repo.
 These jar are in the /lib folder and must be added to your local maven repo. 
 
-The basic comand is 
+### Easy way
+
+Using maven through the command install. The pom file contains all the instructions to install the dependencies
+
+```sh
+$ mvn install
+```
+
+### Hard way
+Through commands: The basic comand is 
 ```sh
 $ mvn install:install-file -Dfile=${jarfile} -DgroupId=${group.id} -DartifactId=${lib.id} -Dversion=${version} -Dpackaging=jar
 ```

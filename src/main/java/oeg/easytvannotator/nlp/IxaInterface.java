@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oeg.easytvannotator.nlpinterfaces;
+package oeg.easytvannotator.nlp;
 
 import com.google.common.io.Files;
 import eus.ixa.ixa.pipe.ml.utils.Flags;
@@ -33,24 +33,24 @@ public class IxaInterface implements NLPApi{
     
     
 
-    private static String PosModel;
-    private static String lemmatizerModel;
-    private static String NERModel;
-    private static String ParserModel;
+    private  String PosModel;
+    private  String lemmatizerModel;
+    private  String NERModel;
+    private  String ParserModel;
    
-    private static  String language;
-    private static  String kafVersion;
+    private   String language;
+    private   String kafVersion;
 
     
     
-    static eus.ixa.ixa.pipe.nerc.Annotate neAnnotator;
-    static eus.ixa.ixa.pipe.pos.Annotate posAnnotator;
-    static eus.ixa.ixa.pipe.parse.Annotate parserAnnotator;
-    static ConstituentParsing parserConstituent;
+    private eus.ixa.ixa.pipe.nerc.Annotate neAnnotator;
+    private eus.ixa.ixa.pipe.pos.Annotate posAnnotator;
+    private eus.ixa.ixa.pipe.parse.Annotate parserAnnotator;
+    private ConstituentParsing parserConstituent;
     
-    private static Properties annotatePosProperties;
-    private static Properties annotateNEProperties;
-    private static Properties annotateParserProperties;
+    private  Properties annotatePosProperties;
+    private  Properties annotateNEProperties;
+    private  Properties annotateParserProperties;
 
   
   
@@ -162,7 +162,7 @@ public class IxaInterface implements NLPApi{
 
     private void initProperties(String Path) {
        
-                    
+            System.out.println(" Interface for Spanish Lang");        
             if(Init){return;}
             
             Init=true;
@@ -227,13 +227,13 @@ public class IxaInterface implements NLPApi{
             annotateNEProperties.setProperty("clearFeatures", Flags.DEFAULT_FEATURE_FLAG);
             
             
-                    try {
-                   neAnnotator    = new eus.ixa.ixa.pipe.nerc.Annotate(annotateNEProperties);
-               } catch (IOException e) {
-                 //throw new RuntimeException("Error init",e);
-               }
-             
-             
+            try {
+            neAnnotator = new eus.ixa.ixa.pipe.nerc.Annotate(annotateNEProperties);
+        } catch (IOException e) {
+            //throw new RuntimeException("Error init",e);
+        }
+
+
          //   Thread.sleep(5000);
             
             
@@ -275,7 +275,7 @@ public class IxaInterface implements NLPApi{
     
     private void initProperties2(String Path) {
        
-                    
+            System.out.println("init properties for italian");        
             if(Init){return;}
             
             Init=true;

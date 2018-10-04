@@ -25,6 +25,7 @@ public class EToken {
     public String Lemma;
     public String Stemm;
     public String Language;
+    public String NE;
     
     public  List<BabelSynset> WordSynsets;
     public List<BabelSynset> LemmaSynsets;
@@ -39,6 +40,7 @@ public class EToken {
         this.Lemma=Lemma;
         this.Stemm=Stemm;
         this.Language=Language;
+        this.NE="O";
         
         WordSynsets=new ArrayList();
         LemmaSynsets=new ArrayList();
@@ -115,6 +117,32 @@ public class EToken {
         }
         return s;
     
+    }
+
+    public void cleanSynsets() {
+        
+        List <BabelSynset> newSynsetList=new ArrayList();
+        for(BabelSynset syn: this.WordSynsets){
+        
+            String Type= syn.getType().toString();
+            if((!Type.equals("Named Entity"))){
+                newSynsetList.add(syn);
+            }
+            
+        }
+        this.WordSynsets=newSynsetList;
+        
+        newSynsetList=new ArrayList();
+        for(BabelSynset syn: this.LemmaSynsets){
+        
+            String Type= syn.getType().toString();
+            if((!Type.equals("Named Entity")) ){
+                newSynsetList.add(syn);
+            }
+            
+        }
+        this.LemmaSynsets=newSynsetList;
+        
     }
     
     

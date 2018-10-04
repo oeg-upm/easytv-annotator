@@ -8,7 +8,7 @@ package oeg.easytvannotator.model;
 import java.util.ArrayList;
 import java.util.List;
 import oeg.easytvannotator.babelnet.BabelNetInterface;
-import oeg.easytvannotator.nlpinterfaces.NLPInterface;
+import oeg.easytvannotator.nlp.NLPInterface;
 
 /**
  *
@@ -44,6 +44,31 @@ public class EasyTVInterface {
         //BabelFlyInterface.callBabelFly(ESentence, Language);
 
         sentences.add(ESentence);
+
+    }
+     
+     
+     
+     public static void sasf(){}
+     
+     public static void printSentences(){
+         print(sentences);
+     
+     }
+     
+     public static void print(List<ESentence> sentences) {
+
+        for (ESentence sentence : sentences) {
+
+            System.out.println("Sentence: " + sentence.OriginalText);
+
+            for (EToken token : sentence.ListTokens) {
+
+                String s = token.printResultsBabel();
+
+            }
+
+        }
 
     }
     
