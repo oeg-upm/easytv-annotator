@@ -30,6 +30,22 @@ public class ESentence {
         this.ListTokens.add(new EToken(word,POS,Lemma,Stemm,Language));
     
     }
+
+    public void associateVideos(InputService input) {
+        
+        for(EToken tok: ListTokens){
+            
+            for(segment seg:input.getVideo().getSegments()){
+                
+                if(tok.Word.equals(seg.getContent())){
+                    tok.copyVideoInforamtion(seg);
+                    break;
+                }
+            }
+            
+        }
+        
+     }
     
     
 }

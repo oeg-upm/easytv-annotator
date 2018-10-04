@@ -2,107 +2,58 @@
 <NAF xml:lang="es" version="1.5.0">
   <nafHeader>
     <linguisticProcessors layer="terms">
-      <lp name="ixa-pipe-pos-es-pos-perceptron-autodict01-ancora-2.0" beginTimestamp="2018-07-17T12:59:30+0200" endTimestamp="2018-07-17T12:59:30+0200" version="null-null" hostname="turing" />
+      <lp name="ixa-pipe-pos-es-pos-perceptron-autodict01-ancora-2.0" beginTimestamp="2018-09-19T17:56:29+0200" endTimestamp="2018-09-19T17:56:29+0200" version="null-null" hostname="DESKTOP-B9USQFN" />
     </linguisticProcessors>
     <linguisticProcessors layer="entities">
-      <lp name="ixa-pipe-nerc-es-4-class-clusters-dictlbj-ancora" beginTimestamp="2018-07-17T12:59:30+0200" endTimestamp="2018-07-17T12:59:30+0200" version="null-null" hostname="turing" />
+      <lp name="ixa-pipe-nerc-es-4-class-clusters-dictlbj-ancora" beginTimestamp="2018-09-19T17:56:29+0200" endTimestamp="2018-09-19T17:56:29+0200" version="null-null" hostname="DESKTOP-B9USQFN" />
     </linguisticProcessors>
     <linguisticProcessors layer="constituency">
-      <lp name="ixa-pipe-parse-es-parser-chunking" beginTimestamp="2018-07-17T12:59:30+0200" endTimestamp="2018-07-17T12:59:30+0200" version="null-null" hostname="turing" />
+      <lp name="ixa-pipe-parse-es-parser-chunking" beginTimestamp="2018-09-19T17:56:29+0200" endTimestamp="2018-09-19T17:56:29+0200" version="null-null" hostname="DESKTOP-B9USQFN" />
     </linguisticProcessors>
   </nafHeader>
   <text>
-    <wf id="w1" offset="0" length="2" sent="1" para="1">El</wf>
-    <wf id="w2" offset="3" length="9" sent="1" para="1">chocolate</wf>
-    <wf id="w3" offset="13" length="5" sent="1" para="1">negro</wf>
-    <wf id="w4" offset="19" length="2" sent="1" para="1">es</wf>
-    <wf id="w5" offset="22" length="3" sent="1" para="1">muy</wf>
-    <wf id="w6" offset="26" length="6" sent="1" para="1">amargo</wf>
-    <wf id="w7" offset="32" length="1" sent="1" para="1">.</wf>
-    <wf id="w8" offset="34" length="2" sent="2" para="1">El</wf>
-    <wf id="w9" offset="37" length="9" sent="2" para="1">chocolate</wf>
-    <wf id="w10" offset="47" length="6" sent="2" para="1">blanco</wf>
-    <wf id="w11" offset="54" length="2" sent="2" para="1">es</wf>
-    <wf id="w12" offset="57" length="5" sent="2" para="1">dulce</wf>
-    <wf id="w13" offset="62" length="1" sent="2" para="1">.</wf>
+    <wf id="w1" offset="0" length="2" sent="1" para="1">he</wf>
+    <wf id="w2" offset="3" length="5" sent="1" para="1">visto</wf>
+    <wf id="w3" offset="9" length="4" sent="1" para="1">esta</wf>
+    <wf id="w4" offset="14" length="8" sent="1" para="1">película</wf>
+    <wf id="w5" offset="23" length="4" sent="1" para="1">tres</wf>
+    <wf id="w6" offset="28" length="5" sent="1" para="1">veces</wf>
   </text>
   <terms>
-    <!--El-->
-    <term id="t1" type="close" lemma="el" pos="D" morphofeat="DA0MS0">
+    <!--he-->
+    <term id="t1" type="open" lemma="haber" pos="V" morphofeat="VAIP1S0">
       <span>
         <target id="w1" />
       </span>
     </term>
-    <!--chocolate-->
-    <term id="t2" type="open" lemma="chocolate" pos="N" morphofeat="NCMS000">
+    <!--visto-->
+    <term id="t2" type="open" lemma="ver" pos="V" morphofeat="VMP00SM">
       <span>
         <target id="w2" />
       </span>
     </term>
-    <!--negro-->
-    <term id="t3" type="open" lemma="negro" pos="G" morphofeat="AQ0MS0">
+    <!--esta-->
+    <term id="t3" type="close" lemma="este" pos="D" morphofeat="DD0FS0">
       <span>
         <target id="w3" />
       </span>
     </term>
-    <!--es-->
-    <term id="t4" type="open" lemma="ser" pos="V" morphofeat="VSIP3S0">
+    <!--película-->
+    <term id="t4" type="open" lemma="película" pos="N" morphofeat="NCFS000">
       <span>
         <target id="w4" />
       </span>
     </term>
-    <!--muy-->
-    <term id="t5" type="open" lemma="muy" pos="A" morphofeat="RG">
+    <!--tres-->
+    <term id="t5" type="close" lemma="tres" pos="D" morphofeat="DN0CP0">
       <span>
         <target id="w5" />
       </span>
     </term>
-    <!--amargo-->
-    <term id="t6" type="open" lemma="amargo" pos="G" morphofeat="AQ0MS0">
+    <!--veces-->
+    <term id="t6" type="open" lemma="vez" pos="N" morphofeat="NCFP000">
       <span>
         <target id="w6" />
-      </span>
-    </term>
-    <!--.-->
-    <term id="t7" type="close" lemma="." pos="O" morphofeat="FP">
-      <span>
-        <target id="w7" />
-      </span>
-    </term>
-    <!--El-->
-    <term id="t8" type="close" lemma="el" pos="D" morphofeat="DA0MS0">
-      <span>
-        <target id="w8" />
-      </span>
-    </term>
-    <!--chocolate-->
-    <term id="t9" type="open" lemma="chocolate" pos="N" morphofeat="NCMS000">
-      <span>
-        <target id="w9" />
-      </span>
-    </term>
-    <!--blanco-->
-    <term id="t10" type="open" lemma="blanco" pos="G" morphofeat="AQ0MS0">
-      <span>
-        <target id="w10" />
-      </span>
-    </term>
-    <!--es-->
-    <term id="t11" type="open" lemma="ser" pos="V" morphofeat="VSIP3S0">
-      <span>
-        <target id="w11" />
-      </span>
-    </term>
-    <!--dulce-->
-    <term id="t12" type="open" lemma="dulce" pos="G" morphofeat="AQ0CS0">
-      <span>
-        <target id="w12" />
-      </span>
-    </term>
-    <!--.-->
-    <term id="t13" type="close" lemma="." pos="O" morphofeat="FP">
-      <span>
-        <target id="w13" />
       </span>
     </term>
   </terms>
@@ -111,164 +62,69 @@
       <!--Non-terminals-->
       <nt id="nter1" label="TOP" />
       <nt id="nter2" label="SENTENCE" />
-      <nt id="nter3" label="S" />
-      <nt id="nter4" label="SN" />
-      <nt id="nter5" label="DA0MS0" />
-      <nt id="nter6" label="GRUP.NOM" />
-      <nt id="nter7" label="NCMS000" />
-      <nt id="nter8" label="S.A" />
-      <nt id="nter9" label="GRUP.A" />
-      <nt id="nter10" label="AQ0MS0" />
-      <nt id="nter11" label="GRUP.VERB" />
-      <nt id="nter12" label="VSIP3S0" />
-      <nt id="nter13" label="SA" />
-      <nt id="nter14" label="RG" />
-      <nt id="nter15" label="GRUP.A" />
-      <nt id="nter16" label="AQ0MS0" />
-      <nt id="nter17" label="FP" />
+      <nt id="nter3" label="GRUP.VERB" />
+      <nt id="nter4" label="VAIP1S0" />
+      <nt id="nter5" label="VMP00SM" />
+      <nt id="nter6" label="SN" />
+      <nt id="nter7" label="DD0FS0" />
+      <nt id="nter8" label="GRUP.NOM" />
+      <nt id="nter9" label="NCFS000" />
+      <nt id="nter10" label="DN0CP0" />
+      <nt id="nter11" label="NCFP000" />
       <!--Terminals-->
-      <!--El-->
+      <!--he-->
       <t id="ter1">
         <span>
           <target id="t1" />
         </span>
       </t>
-      <!--chocolate-->
+      <!--visto-->
       <t id="ter2">
         <span>
           <target id="t2" />
         </span>
       </t>
-      <!--negro-->
+      <!--esta-->
       <t id="ter3">
         <span>
           <target id="t3" />
         </span>
       </t>
-      <!--es-->
+      <!--película-->
       <t id="ter4">
         <span>
           <target id="t4" />
         </span>
       </t>
-      <!--muy-->
+      <!--tres-->
       <t id="ter5">
         <span>
           <target id="t5" />
         </span>
       </t>
-      <!--amargo-->
+      <!--veces-->
       <t id="ter6">
         <span>
           <target id="t6" />
-        </span>
-      </t>
-      <!--.-->
-      <t id="ter7">
-        <span>
-          <target id="t7" />
         </span>
       </t>
       <!--Tree edges-->
       <edge id="tre2" from="nter2" to="nter1" />
       <edge id="tre3" from="nter3" to="nter2" />
       <edge id="tre4" from="nter4" to="nter3" />
-      <edge id="tre5" from="nter5" to="nter4" />
-      <edge id="tre6" from="ter1" to="nter5" />
-      <edge id="tre7" from="nter6" to="nter4" />
-      <edge id="tre8" from="nter7" to="nter6" />
-      <edge id="tre9" from="ter2" to="nter7" />
-      <edge id="tre10" from="nter8" to="nter6" />
-      <edge id="tre11" from="nter9" to="nter8" />
-      <edge id="tre12" from="nter10" to="nter9" />
-      <edge id="tre13" from="ter3" to="nter10" />
-      <edge id="tre14" from="nter11" to="nter3" />
-      <edge id="tre15" from="nter12" to="nter11" />
-      <edge id="tre16" from="ter4" to="nter12" />
-      <edge id="tre17" from="nter13" to="nter3" />
-      <edge id="tre18" from="nter14" to="nter13" />
-      <edge id="tre19" from="ter5" to="nter14" />
-      <edge id="tre20" from="nter15" to="nter13" />
-      <edge id="tre21" from="nter16" to="nter15" />
-      <edge id="tre22" from="ter6" to="nter16" />
-      <edge id="tre23" from="nter17" to="nter2" />
-      <edge id="tre24" from="ter7" to="nter17" />
-    </tree>
-    <tree>
-      <!--Non-terminals-->
-      <nt id="nter18" label="TOP" />
-      <nt id="nter19" label="SENTENCE" />
-      <nt id="nter20" label="SN" />
-      <nt id="nter21" label="DA0MS0" />
-      <nt id="nter22" label="GRUP.NOM" />
-      <nt id="nter23" label="NCMS000" />
-      <nt id="nter24" label="S.A" />
-      <nt id="nter25" label="GRUP.A" />
-      <nt id="nter26" label="AQ0MS0" />
-      <nt id="nter27" label="GRUP.VERB" />
-      <nt id="nter28" label="VSIP3S0" />
-      <nt id="nter29" label="SA" />
-      <nt id="nter30" label="GRUP.A" />
-      <nt id="nter31" label="AQ0CS0" />
-      <nt id="nter32" label="FP" />
-      <!--Terminals-->
-      <!--El-->
-      <t id="ter8">
-        <span>
-          <target id="t8" />
-        </span>
-      </t>
-      <!--chocolate-->
-      <t id="ter9">
-        <span>
-          <target id="t9" />
-        </span>
-      </t>
-      <!--blanco-->
-      <t id="ter10">
-        <span>
-          <target id="t10" />
-        </span>
-      </t>
-      <!--es-->
-      <t id="ter11">
-        <span>
-          <target id="t11" />
-        </span>
-      </t>
-      <!--dulce-->
-      <t id="ter12">
-        <span>
-          <target id="t12" />
-        </span>
-      </t>
-      <!--.-->
-      <t id="ter13">
-        <span>
-          <target id="t13" />
-        </span>
-      </t>
-      <!--Tree edges-->
-      <edge id="tre26" from="nter19" to="nter18" />
-      <edge id="tre27" from="nter20" to="nter19" />
-      <edge id="tre28" from="nter21" to="nter20" />
-      <edge id="tre29" from="ter8" to="nter21" />
-      <edge id="tre30" from="nter22" to="nter20" />
-      <edge id="tre31" from="nter23" to="nter22" />
-      <edge id="tre32" from="ter9" to="nter23" />
-      <edge id="tre33" from="nter24" to="nter22" />
-      <edge id="tre34" from="nter25" to="nter24" />
-      <edge id="tre35" from="nter26" to="nter25" />
-      <edge id="tre36" from="ter10" to="nter26" />
-      <edge id="tre37" from="nter27" to="nter19" />
-      <edge id="tre38" from="nter28" to="nter27" />
-      <edge id="tre39" from="ter11" to="nter28" />
-      <edge id="tre40" from="nter29" to="nter19" />
-      <edge id="tre41" from="nter30" to="nter29" />
-      <edge id="tre42" from="nter31" to="nter30" />
-      <edge id="tre43" from="ter12" to="nter31" />
-      <edge id="tre44" from="nter32" to="nter19" />
-      <edge id="tre45" from="ter13" to="nter32" />
+      <edge id="tre5" from="ter1" to="nter4" />
+      <edge id="tre6" from="nter5" to="nter3" />
+      <edge id="tre7" from="ter2" to="nter5" />
+      <edge id="tre8" from="nter6" to="nter2" />
+      <edge id="tre9" from="nter7" to="nter6" />
+      <edge id="tre10" from="ter3" to="nter7" />
+      <edge id="tre11" from="nter8" to="nter6" />
+      <edge id="tre12" from="nter9" to="nter8" />
+      <edge id="tre13" from="ter4" to="nter9" />
+      <edge id="tre14" from="nter10" to="nter2" />
+      <edge id="tre15" from="ter5" to="nter10" />
+      <edge id="tre16" from="nter11" to="nter2" />
+      <edge id="tre17" from="ter6" to="nter11" />
     </tree>
   </constituency>
 </NAF>

@@ -54,6 +54,7 @@ public class BabelNetDemo {
      //callBabelNetWord("anoche", Language.ES);
     }
     
+<<<<<<< HEAD
     public static List<BabelSynset> callBabelNetWord(String word, Language lang)  {
 
         System.out.println("Babelnet Call: Word-"+word+" Lang-"+lang);
@@ -100,6 +101,10 @@ public class BabelNetDemo {
         
         return synsets;
     }
+=======
+   
+    
+>>>>>>> 3bd457b194fd6c3c99bde7ad8689725e64c28a8d
     
      public static List<BabelSynset> callBabelNetWordPOS(String word, Language lang, UniversalPOS pos)  {
 

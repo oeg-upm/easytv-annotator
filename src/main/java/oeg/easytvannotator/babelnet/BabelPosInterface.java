@@ -13,13 +13,18 @@ import com.babelscape.util.UniversalPOS;
  */
 public class BabelPosInterface {
       
-    public static UniversalPOS getBabelPOS(String StanfordPOS, String Lang){
+    public static UniversalPOS getBabelPOS(String pos, String Lang){
      
-        if (StanfordPOS.startsWith("V")) {
+        if (pos.startsWith("V")) {
+            
+            if(pos.startsWith("VA")){
+                return null;
+            }
+            
             return UniversalPOS.VERB;
         }
 
-        if (StanfordPOS.startsWith("N")) {
+        if (pos.startsWith("N")) {
             return UniversalPOS.NOUN;
         }
         
@@ -27,12 +32,12 @@ public class BabelPosInterface {
 
         if (Lang.equals("EN")) {
 
-            if (StanfordPOS.equals("JJ")) {
+            if (pos.equals("JJ")) {
                 return UniversalPOS.ADJ;
 
             }
 
-            if (StanfordPOS.equals("DT")) {
+            if (pos.equals("DT")) {
                 //return UniversalPOS.DET;
 
             }
@@ -41,59 +46,57 @@ public class BabelPosInterface {
 
         if (Lang.equals("ES")) {
             
-            if (StanfordPOS.startsWith("A")) {
+            if (pos.startsWith("A")) {
                 return UniversalPOS.ADJ;
 
             }
 
-            if (StanfordPOS.startsWith("R")) {
+            if (pos.startsWith("R")) {
                 return UniversalPOS.ADV;
 
             }
             
-            if (StanfordPOS.startsWith("D")) {
+            if (pos.startsWith("D")) {
                 //return UniversalPOS.DET;
 
             }
 
-            if (StanfordPOS.startsWith("T")) {
+            if (pos.startsWith("T")) {
                 //return UniversalPOS.ADP;
 
             }
             
-            if (StanfordPOS.startsWith("PP")) {
+            if (pos.startsWith("PP")) {
                 //return UniversalPOS.PRON;
 
             }
             
-           
-            
-            
         }
+        
         
         if (Lang.equals("EL")) {
             
-            if (StanfordPOS.startsWith("A")) {
+            if (pos.startsWith("A")) {
                 return UniversalPOS.ADJ;
 
             }
 
-            if (StanfordPOS.startsWith("R")) {
+            if (pos.startsWith("R")) {
                 return UniversalPOS.ADV;
 
             }
             
-            if (StanfordPOS.startsWith("D")) {
+            if (pos.startsWith("D")) {
                 //return UniversalPOS.DET;
 
             }
 
-            if (StanfordPOS.startsWith("T")) {
+            if (pos.startsWith("T")) {
                 //return UniversalPOS.ADP;
 
             }
             
-            if (StanfordPOS.startsWith("PP")) {
+            if (pos.startsWith("PP")) {
                 //return UniversalPOS.PRON;
 
             }
