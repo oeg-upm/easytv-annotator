@@ -31,11 +31,11 @@ public class ESentence {
     
     }
 
-    public void associateVideos(InputService input) {
+    public void associateVideos(JsonInput input) {
         
         for(EToken tok: ListTokens){
             
-            for(segment seg:input.getVideo().getSegments()){
+            for(SignLanguageSegment seg:input.getVideo().getSegments()){
                 
                 if(tok.Word.equals(seg.getContent())){
                    // tok.copyVideoInforamtion(seg);

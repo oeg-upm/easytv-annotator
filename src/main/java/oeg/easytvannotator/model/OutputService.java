@@ -9,7 +9,7 @@ package oeg.easytvannotator.model;
  *
  * @author Pablo
  */
-public class InputService {
+public class OutputService {
     
     private SignLanguageVideo video;
 

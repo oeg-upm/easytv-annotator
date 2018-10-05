@@ -20,7 +20,7 @@ public class EasyTVInterface {
     public static List <ESentence> sentences=new ArrayList();
     
     public ESentence Esentence;
-    public InputService input;
+    public JsonInput input;
     
     NLPInterface Nlpinterface;
     
@@ -53,32 +53,11 @@ public class EasyTVInterface {
     }
      
      
+  
+ 
      
-     public static void sasf(){}
-     
-     public static void printSentences(){
-         print(sentences);
-     
-     }
-     
-     public static void print(List<ESentence> sentences) {
-
-        for (ESentence sentence : sentences) {
-
-            System.out.println("Sentence: " + sentence.OriginalText);
-
-            for (EToken token : sentence.ListTokens) {
-
-                String s = token.printResultsBabel();
-
-            }
-
-        }
-
-    }
     
-    
-    public ESentence processJson( InputService input) {
+    public ESentence processJson( JsonInput input) {
 
         this.input=input;
         String Sentence = input.getVideo().getNls().trim();
@@ -86,8 +65,6 @@ public class EasyTVInterface {
 
         System.out.println("Recieved: " + Sentence + "  Lang:" + Language);
 
-        
-        
         // SENTENCE
         this.Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
         //BABELNET
@@ -100,7 +77,7 @@ public class EasyTVInterface {
     }
 
     
-    public InputService processJson2( InputService input) {
+    public JsonInput processJson2( JsonInput input) {
 
         this.input=input;
         String Sentence = input.getVideo().getNls().trim();
@@ -121,4 +98,29 @@ public class EasyTVInterface {
 
     }
 
+    
+    
+     public static void print(List<ESentence> sentences) {
+
+        for (ESentence sentence : sentences) {
+
+            System.out.println("Sentence: " + sentence.OriginalText);
+
+            for (EToken token : sentence.ListTokens) {
+
+                String s = token.printResultsBabel();
+
+            }
+
+        }
+
+    }
+     
+         
+     public static void printSentences(){
+         print(sentences);
+     
+     }
+    
+    
 }

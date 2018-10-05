@@ -19,7 +19,7 @@ public class SignLanguageVideo {
     private String sls;
     private String duration;
     private String language;
-    private List <segment> segments;
+    private List <SignLanguageSegment> segments;
 
     public String getUrl() {
         return url;
@@ -61,11 +61,11 @@ public class SignLanguageVideo {
         this.language = language;
     }
 
-    public List<segment> getSegments() {
+    public List<SignLanguageSegment> getSegments() {
         return segments;
     }
 
-    public void setSegments(List<segment> segments) {
+    public void setSegments(List<SignLanguageSegment> segments) {
         this.segments = segments;
     }
 

@@ -152,7 +152,7 @@ public class EToken {
         
     }
     
-    public void copyVideoInforamtion(segment seg) {
+    public void copyVideoInforamtion(SignLanguageSegment seg) {
         
         this.Order=seg.getOrder();
         this.Start=seg.getStart();

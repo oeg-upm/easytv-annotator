@@ -6,13 +6,14 @@
 package oeg.easytvannotator.model;
 
 import it.uniroma1.lcl.babelnet.BabelSynset;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Pablo
  */
-public class segment {
+public class SignLanguageSegment {
     
     private String order;
     private String start;
@@ -33,8 +34,13 @@ public class segment {
     
     public  List<String> WordBabelblySemanticAnnotations;
     public List<String> LemmaBabelblySemanticAnnotations;
-
     
+    
+    public SignLanguageSegment(){
+    
+        WordSynsets=new ArrayList();
+        LemmaSynsets=new ArrayList();
+    }
     
     public String getOrder() {
         return order;
