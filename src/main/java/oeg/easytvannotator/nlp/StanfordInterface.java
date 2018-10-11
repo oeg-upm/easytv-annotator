@@ -49,6 +49,8 @@ public class StanfordInterface implements NLPApi {
         // spanish test
         //http://data.cervantesvirtual.com/blog/2017/07/17/libreria-corenlp-de-stanford-de-procesamiento-lenguage-natural-reconocimiento-entidades/
 
+        
+        
         if (Lang.toUpperCase().equals("ES")) {
             props.setProperty("tokenize.language", "ES");
             props.setProperty("pos.model", "edu/stanford/nlp/models/pos-tagger/spanish/spanish-distsim.tagger");
@@ -84,7 +86,7 @@ public class StanfordInterface implements NLPApi {
                 String pos = token.get(CoreAnnotations.PartOfSpeechAnnotation.class);
                 String lem = token.get(CoreAnnotations.LemmaAnnotation.class);
                 String stem = token.get(CoreAnnotations.StemAnnotation.class);
-                System.out.println(word + "  " + pos + "  " + lem + "  " + stem);
+                logger.info(word + "  " + pos + "  " + lem + "  " + stem);
 
                 esentence.addEToken(word, pos, lem, stem, Lang);
                 tokenSentence.append(word + " ");

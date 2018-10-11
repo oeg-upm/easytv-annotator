@@ -62,40 +62,11 @@ public class BabelNetInterface {
         }
 
         bnInstance = BabelNet.getInstance();
+        
 
     }
 
-    public static List<BabelSynset> callBabelNetWord(String word, Language lang) {
-
-        List<BabelSynset> synsets = new ArrayList();
-        try {
-            if (bnInstance == null) {
-                //bnInstance = BabelNet.getInstance();
-                initInstance();
-            }
-
-            BabelNetQuery query = new BabelNetQuery.Builder(word)
-                    .from(lang)
-                    .sources(Arrays.asList(BabelSenseSource.BABELNET, BabelSenseSource.WN, BabelSenseSource.WIKIDATA))
-                    //.to(Arrays.asList(Language.EN))
-
-                    .build();
-
-            synsets = bnInstance.getSynsets(query);
-
-            Collections.sort(synsets, new BabelSynsetComparator(word));
-
-        } catch (Exception ex) {
-            logger.error(ex);
-        }
-        if (synsets.size() > 4) {
-            return synsets.subList(0, 4);
-        }
-
-        return synsets;
-
-    }
-
+    
     public static List<BabelSynset> callBabelNetWordPOS(String word, Language lang, UniversalPOS pos) {
 
         logger.info("Babelnet Call: Word-" + word + " Lang-" + lang + " POS-" + pos);
@@ -105,6 +76,7 @@ public class BabelNetInterface {
         synsets = BabelDatabase.getConcept(word, pos.toString(), lang.toString());
 
         if (synsets != null) {
+            logger.info("synsets already identified");
             return synsets;
         }
 
@@ -127,23 +99,78 @@ public class BabelNetInterface {
 
             synsets = bnInstance.getSynsets(query);
 
-            logger.info("Results:" + synsets.size());
+            logger.info("BabelNet Results:" + synsets.size());
 
             Collections.sort(synsets, new BabelSynsetComparator(word, lang));
 
             if (synsets.size() > 7) {
                 synsets = synsets.subList(0, 7);
             }
-
+            
+            
+            BabelDatabase.addConcept(word, pos.toString(), lang.toString(), synsets);
         } catch (Exception ex) {
             logger.error(ex);
+            logger.error(ex.toString());
+            initInstance();
+            
         }
 
-        BabelDatabase.addConcept(word, pos.toString(), lang.toString(), synsets);
+        
 
         return synsets;
     }
 
+    
+    
+    public static void callBabelNet(ESentence Sentence, String Lang) {
+
+        Language Langua = BabelLangInterface.getLangType(Lang);
+
+        for (EToken token : Sentence.ListTokens) {
+
+            String StanPos = token.POS.toUpperCase();
+            UniversalPOS Babelpos = BabelPosInterface.getBabelPOS(StanPos, Lang);
+
+            if (Babelpos != null) {
+                //token.WordSynsets = callBabelNetWordPOS(token.Word, Langua, Babelpos);
+                token.LemmaSynsets = callBabelNetWordPOS(token.Lemma, Langua, Babelpos);
+                token.cleanSynsets();
+
+            } else {
+                logger.info("No BabelNet search for :" + token.Word + "  " + token.POS);
+            }
+
+        }
+
+    }
+
+    
+
+    /*
+    public static void callBabelNet(BabelNet bnInstance, ESentence Sentence, String Lang) {
+
+        BabelNetInterface.bnInstance = bnInstance;
+        Language Langua = BabelLangInterface.getLangType(Lang);
+
+        for (EToken token : Sentence.ListTokens) {
+
+            String StanPos = token.POS.toUpperCase();
+            UniversalPOS Babelpos = BabelPosInterface.getBabelPOS(StanPos, Lang);
+
+            if (Babelpos != null) {
+                //token.WordSynsets = callBabelNetWordPOS(token.Word, Langua, Babelpos);
+                token.LemmaSynsets = callBabelNetWordPOS(token.Lemma, Langua, Babelpos);
+
+            } else {
+                logger.info("No BabelPOS for :" + token.Word + "  " + token.POS);
+            }
+
+        }
+
+    }
+    
+    @Deprecated
     public static List<BabelSynset> callBabelNetWordPOSAmplified(String word, Language lang, UniversalPOS pos) {
 
         logger.info("BabelNet Call: Word-" + word + " Lang-" + lang + " POS-" + pos);
@@ -205,49 +232,39 @@ public class BabelNetInterface {
         return synsets;
     }
 
-    public static void callBabelNet(ESentence Sentence, String Lang) {
+    
+    @Deprecated
+    public static List<BabelSynset> callBabelNetWord(String word, Language lang) {
 
-        Language Langua = BabelLangInterface.getLangType(Lang);
-
-        for (EToken token : Sentence.ListTokens) {
-
-            String StanPos = token.POS.toUpperCase();
-            UniversalPOS Babelpos = BabelPosInterface.getBabelPOS(StanPos, Lang);
-
-            if (Babelpos != null) {
-                token.WordSynsets = callBabelNetWordPOS(token.Word, Langua, Babelpos);
-                token.LemmaSynsets = callBabelNetWordPOS(token.Lemma, Langua, Babelpos);
-                token.cleanSynsets();
-
-            } else {
-                logger.info("No BabelPOS for :" + token.Word + "  " + token.POS);
+        List<BabelSynset> synsets = new ArrayList();
+        try {
+            if (bnInstance == null) {
+                //bnInstance = BabelNet.getInstance();
+                initInstance();
             }
 
+            BabelNetQuery query = new BabelNetQuery.Builder(word)
+                    .from(lang)
+                    .sources(Arrays.asList(BabelSenseSource.BABELNET, BabelSenseSource.WN, BabelSenseSource.WIKIDATA))
+                    //.to(Arrays.asList(Language.EN))
+
+                    .build();
+
+            synsets = bnInstance.getSynsets(query);
+
+            Collections.sort(synsets, new BabelSynsetComparator(word));
+
+        } catch (Exception ex) {
+            logger.error(ex);
         }
+        if (synsets.size() > 4) {
+            return synsets.subList(0, 4);
+        }
+
+        return synsets;
 
     }
 
-    public static void callBabelNet(BabelNet bnInstance, ESentence Sentence, String Lang) {
-
-        BabelNetInterface.bnInstance = bnInstance;
-        Language Langua = BabelLangInterface.getLangType(Lang);
-
-        for (EToken token : Sentence.ListTokens) {
-
-            String StanPos = token.POS.toUpperCase();
-            UniversalPOS Babelpos = BabelPosInterface.getBabelPOS(StanPos, Lang);
-
-            if (Babelpos != null) {
-                token.WordSynsets = callBabelNetWordPOS(token.Word, Langua, Babelpos);
-                token.LemmaSynsets = callBabelNetWordPOS(token.Lemma, Langua, Babelpos);
-
-            } else {
-                logger.info("No BabelPOS for :" + token.Word + "  " + token.POS);
-            }
-
-        }
-
-    }
-
+*/
 
 }
