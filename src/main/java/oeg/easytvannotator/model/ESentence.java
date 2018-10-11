@@ -49,4 +49,16 @@ public class ESentence {
      }
     
     
+     public void print(){
+     
+     
+          System.out.println("Sentence: " + this.OriginalText);
+
+            for (EToken token : this.ListTokens) {
+
+                String s = token.printResultsBabel();
+
+            }
+     }
+    
 }

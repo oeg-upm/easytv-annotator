@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Properties;
 import oeg.easytvannotator.demos.Stemmer;
 import oeg.easytvannotator.model.ESentence;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -29,11 +30,16 @@ public class StanfordInterface implements NLPApi {
         
     
     }*/
+    
+    
+    static Logger logger = Logger.getLogger(StanfordInterface.class);
+    
+    
     @Override
     public ESentence parseSentence(String Sentence, String Lang) {
 
-        System.out.println("\n\n\n");
-        System.out.println("***** STANFORD ************");
+        logger.info("\n\n\n");
+        logger.info("***** STANFORD ************");
 
         // creates a StanfordCoreNLP object, with POS tagging, lemmatization, NER, parsing, and coreference resolution 
         Properties props = new Properties();

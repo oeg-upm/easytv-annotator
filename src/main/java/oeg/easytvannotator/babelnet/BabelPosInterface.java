@@ -37,6 +37,10 @@ public class BabelPosInterface {
 
             }
 
+            if (pos.equals("IN")) {
+                return UniversalPOS.VERB;
+
+            }
             if (pos.equals("DT")) {
                 //return UniversalPOS.DET;
 

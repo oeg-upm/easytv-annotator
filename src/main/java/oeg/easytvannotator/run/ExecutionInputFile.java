@@ -18,9 +18,6 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
-import oeg.easytvannotator.babelnet.BabelNetInterface;
-import oeg.easytvannotator.nlp.IxaInterface;
-import oeg.easytvannotator.nlp.StanfordInterface;
 import oeg.easytvannotator.model.ESentence;
 import oeg.easytvannotator.model.EToken;
 import oeg.easytvannotator.model.EasyTVInterface;
@@ -35,10 +32,15 @@ public class ExecutionInputFile {
     
     public static List <ESentence> sentences=new ArrayList();
     
+    
+    
     public static void main(String[] args) throws UnsupportedEncodingException, IOException {
 
         String InputFile = "InputFile.csv";
 
+        
+        EasyTVInterface inter= new EasyTVInterface("");
+        
         BufferedReader br = null;
         File fr = new File(InputFile);
 
@@ -46,11 +48,11 @@ public class ExecutionInputFile {
 
         String Line;
         
-
+        
         while ((Line = br.readLine()) != null) {
 
            String[] Input = Line.split(",");
-           EasyTVInterface.processLine("",Input[0], Input[1]);
+           ESentence sent= inter.processLine(Input[0], Input[1]);
         }
 
         br.close();

@@ -5,12 +5,9 @@
  */
 package oeg.easytvannotator.run;
 
-import it.uniroma1.lcl.jlt.util.Language;
 import java.util.Scanner;
 import oeg.easytvannotator.demos.BabelNetDemo;
 import oeg.easytvannotator.demos.BabelflyDemo;
-import oeg.easytvannotator.babelnet.BabelFlyInterface;
-import oeg.easytvannotator.babelnet.BabelNetInterface;
 
 /**
  *

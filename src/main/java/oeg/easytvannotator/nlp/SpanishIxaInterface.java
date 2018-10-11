@@ -19,15 +19,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import oeg.easytvannotator.model.ESentence;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author pcalleja
  */
-public class IxaInterface implements NLPApi{
+public class SpanishIxaInterface implements NLPApi{
     
     
 
@@ -53,24 +52,19 @@ public class IxaInterface implements NLPApi{
   
   
   // Parse properties
-    private static final String parseVersion = eus.ixa.ixa.pipe.parse.CLI.class.getPackage().getImplementationVersion();
-    private static final String parseCommit = eus.ixa.ixa.pipe.parse.CLI.class.getPackage().getSpecificationVersion();
+    private  final String parseVersion = eus.ixa.ixa.pipe.parse.CLI.class.getPackage().getImplementationVersion();
+    private  final String parseCommit = eus.ixa.ixa.pipe.parse.CLI.class.getPackage().getSpecificationVersion();
     
     private boolean Init=false;
     
     
-    public IxaInterface(String RootPath, String Lang){
+     static Logger logger = Logger.getLogger(SpanishIxaInterface.class);
     
-        if(Lang.equals("es")){
-        
-            initProperties(RootPath);
-        }
-        if(Lang.equals("it")){
-        
-            initProperties2(RootPath);
-        }
+    public SpanishIxaInterface(String RootPath){
     
-    
+      
+        initProperties(RootPath);
+
     }
   
     
@@ -130,7 +124,7 @@ public class IxaInterface implements NLPApi{
             
              for (Term term : kaf.getTerms()) {
                 
-                System.out.println("IXA: "+ term.getStr()+"(word)  "+term.getLemma()+"(lemma) "+term.getMorphofeat()+"(POS)  ");
+                logger.info("IXA: "+ term.getStr()+"(word)  "+term.getLemma()+"(lemma) "+term.getMorphofeat()+"(POS)  ");
                 esentence.addEToken(term.getStr(), term.getMorphofeat(), term.getLemma(), term.getStr(), Lang);
                 tokenSentence.append(term.getStr()+" ");
                 LemmaSentence.append(term.getLemma()+" ");
@@ -146,8 +140,8 @@ public class IxaInterface implements NLPApi{
             return esentence;
             
         } catch (IOException ex) {
-            Logger.getLogger(IxaInterface.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("error"+ex.toString());
+            logger.error(ex);
+            
         }
             return new ESentence();
      }
@@ -160,7 +154,7 @@ public class IxaInterface implements NLPApi{
 
     private void initProperties(String Path) {
        
-            System.out.println(" Interface for Spanish Lang");        
+            logger.info("Initializing Interface for Spanish Lang");        
             if(Init){return;}
             
             Init=true;
@@ -204,7 +198,7 @@ public class IxaInterface implements NLPApi{
             try {
                 posAnnotator    = new Annotate(annotatePosProperties);
             } catch (IOException e) {
-                
+                logger.error("POS Spanish failed." +e);
             }
             
             // NER
@@ -227,9 +221,9 @@ public class IxaInterface implements NLPApi{
             
             try {
             neAnnotator = new eus.ixa.ixa.pipe.nerc.Annotate(annotateNEProperties);
-        } catch (IOException e) {
-            //throw new RuntimeException("Error init",e);
-        }
+            } catch (IOException e) {
+              logger.error("NER Spanish failed." +e);
+            }
 
 
          //   Thread.sleep(5000);
@@ -270,83 +264,5 @@ public class IxaInterface implements NLPApi{
         
     }
     
-    
-    private void initProperties2(String Path) {
-       
-            System.out.println("init properties for italian");        
-            if(Init){return;}
-            
-            Init=true;
-            
-            String multiwords;
-            String dictag;
-            String noseg;
-            
-            String normalize; //Set normalization method according to corpus; the default option does not escape "brackets or forward slashes.
-            String untokenizable; //Print untokenizable characters.
-            String hardParagraph; //Do not segment paragraphs. Ever.
-            
-            
-            PosModel              = new File(Path+"resources/models/ud-morph-models-1.5.0/it/it-pos-perceptron-autodict01-ud.bin").getAbsolutePath();
-            lemmatizerModel    = new File(Path+"resources/models/ud-morph-models-1.5.0/it/it-lemma-perceptron-ud.bin").getAbsolutePath();
-            language           = "it";
-            kafVersion         = "1.5.0";
-            
-            multiwords         = "false"; //true
-            dictag             = new File(Path+"resources/models/tag").getAbsolutePath();
-            normalize          = "true";
-            untokenizable      = "false"; // false
-            hardParagraph      = "false";
-            noseg              = "false";
-            
-            
-            annotatePosProperties = new Properties();
-            
-            annotatePosProperties.setProperty("normalize", normalize);
-            annotatePosProperties.setProperty("untokenizable", untokenizable);
-            annotatePosProperties.setProperty("hardParagraph", hardParagraph);
-            annotatePosProperties.setProperty("noseg",noseg);
-            annotatePosProperties.setProperty("model", PosModel);
-            annotatePosProperties.setProperty("lemmatizerModel", lemmatizerModel);
-            annotatePosProperties.setProperty("language", language);
-            annotatePosProperties.setProperty("multiwords", multiwords);
-            annotatePosProperties.setProperty("dictTag", dictag);
-            annotatePosProperties.setProperty("dictPath", dictag);
-            annotatePosProperties.setProperty("ruleBasedOption", dictag);
-            
-            try {
-                posAnnotator    = new Annotate(annotatePosProperties);
-            } catch (IOException e) {
-                
-            }
-            
-            // NER
-            
-            
-            NERModel = new File(Path+"resources/models/nerc-models-1.5.4/it/it-clusters-evalita09.bin").getAbsolutePath();
-            language = "it";
-            dictag = new File("resources/models/tag").getAbsolutePath();
-            
-            
-            
-            annotateNEProperties = new Properties();
-            annotateNEProperties.setProperty("model", NERModel);
-            annotateNEProperties.setProperty("language", language);
-            annotateNEProperties.setProperty("ruleBasedOption", Flags.DEFAULT_LEXER);
-            annotateNEProperties.setProperty("dictTag", Flags.DEFAULT_DICT_OPTION);
-            annotateNEProperties.setProperty("dictPath", Flags.DEFAULT_DICT_PATH);
-            annotateNEProperties.setProperty("clearFeatures", Flags.DEFAULT_FEATURE_FLAG);
-            
-            
-                    try {
-                   neAnnotator    = new eus.ixa.ixa.pipe.nerc.Annotate(annotateNEProperties);
-               } catch (IOException e) {
-                 //throw new RuntimeException("Error init",e);
-               }
-             
-             
-    
-        
-    }
 
 }

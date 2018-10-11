@@ -16,22 +16,21 @@ public class NLPInterface {
     
     
     
-    public String RootPath="";
+    private String RootPath="";
     
     
-    public IxaInterface SpanishLib;
-    //public IxaInterface ItalianLib;
-    public StanfordInterface EnglishLib;
-    public TreeTaggerInterface GreekLib;
+    private SpanishIxaInterface SpanishLib;
+    private ItalianIxaInterface ItalianLib;
+    private StanfordInterface EnglishLib;
+    private TreeTaggerInterface GreekLib;
     
     
     public NLPInterface(String RootPath){
     
         this.RootPath=RootPath;
-        SpanishLib = new IxaInterface(RootPath,"es");
-        
-        
-        //ItalianLib = new IxaInterface(RootPath,"it");
+        SpanishLib = new SpanishIxaInterface(RootPath);
+
+        ItalianLib = new ItalianIxaInterface(RootPath);
         
         EnglishLib= new StanfordInterface();
         
@@ -51,7 +50,7 @@ public class NLPInterface {
         }
 
         if (Language.equals("it")) {
-            //return ItalianLib.parseSentence(Sentence, Language);
+            return ItalianLib.parseSentence(Sentence, Language);
         }
 
         if (Language.equals("cat")) {
@@ -64,6 +63,52 @@ public class NLPInterface {
         return null;
 
     }
+    
+    
 
+    public String getRootPath() {
+        return RootPath;
+    }
+
+    public void setRootPath(String RootPath) {
+        this.RootPath = RootPath;
+    }
+
+    public SpanishIxaInterface getSpanishLib() {
+        return SpanishLib;
+    }
+
+    public void setSpanishLib(SpanishIxaInterface SpanishLib) {
+        this.SpanishLib = SpanishLib;
+    }
+
+    public ItalianIxaInterface getItalianLib() {
+        return ItalianLib;
+    }
+
+    public void setItalianLib(ItalianIxaInterface ItalianLib) {
+        this.ItalianLib = ItalianLib;
+    }
+
+    public StanfordInterface getEnglishLib() {
+        return EnglishLib;
+    }
+
+    public void setEnglishLib(StanfordInterface EnglishLib) {
+        this.EnglishLib = EnglishLib;
+    }
+
+    public TreeTaggerInterface getGreekLib() {
+        return GreekLib;
+    }
+
+    public void setGreekLib(TreeTaggerInterface GreekLib) {
+        this.GreekLib = GreekLib;
+    }
+
+    
+    
+    
+    
    
 }

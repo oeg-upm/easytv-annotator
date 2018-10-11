@@ -79,7 +79,7 @@ public class EToken {
                   
             String id= syn.getID().toString().replace("bn:", "");
             String ss="  http://babelnet.org/rdf/s"+id + "  --   "+    "http://babelnet.org/rdf/"+parseLemma(sense.getFullLemma())+"_"+sense.getLanguage().toString()+"/s"+id;
-            System.out.println(ss);
+            //System.out.println(ss);
         }
         if(s.length()>1){
         s= s.substring(0, s.length()-1);

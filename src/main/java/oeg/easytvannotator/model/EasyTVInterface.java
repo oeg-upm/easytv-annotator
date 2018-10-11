@@ -5,101 +5,94 @@
  */
 package oeg.easytvannotator.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import oeg.easytvannotator.babelnet.BabelNetInterface;
 import oeg.easytvannotator.nlp.NLPInterface;
-
+import org.apache.log4j.Logger;
 /**
  *
  * @author pcalleja
  */
 public class EasyTVInterface {
       
+   
     
-    public static List <ESentence> sentences=new ArrayList();
+    private JsonInput input;
     
-    public ESentence Esentence;
-    public JsonInput input;
+    private NLPInterface Nlpinterface;
     
-    NLPInterface Nlpinterface;
     
-    public EasyTVInterface(){
-
-    }
-    public EasyTVInterface(String path){
-        Nlpinterface =new NLPInterface(path);
+    static Logger logger = Logger.getLogger(EasyTVInterface.class);
+    
+    //public EasyTVInterface(){}
+    
+    
+    public EasyTVInterface(String ResourcesPath){
+        Nlpinterface =new NLPInterface(ResourcesPath);
         
     }
     
     
-    public static void processLine(String Path, String Language, String Sentence) {
+    public ESentence processLine(String Language, String Sentence) {
 
         Sentence = Sentence.trim();
-
-        System.out.println("Recieved: " + Sentence + "  Lang:" + Language);
-
-        NLPInterface inter = new NLPInterface(Path);
-
-        // SENTENCE
-        ESentence ESentence = inter.createESentence(Language.toLowerCase(), Sentence);
-        //BABELNET
-        BabelNetInterface.callBabelNet(ESentence, Language);
-
-        // BABELFLY
-        //BabelFlyInterface.callBabelFly(ESentence, Language);
-        sentences.add(ESentence);
-
-    }
-     
-     
-  
- 
-     
-    
-    public ESentence processJson( JsonInput input) {
-
-        this.input=input;
-        String Sentence = input.getVideo().getNls().trim();
-        String Language=input.getVideo().getLanguage();
-
-        System.out.println("Recieved: " + Sentence + "  Lang:" + Language);
-
-        // SENTENCE
-        this.Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
+        logger.info("Recieved: " + Sentence + "  Lang:" + Language);
+        
+        
+        // Create E SENTENCE
+        ESentence Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
         //BABELNET
         BabelNetInterface.callBabelNet(Esentence, Language);
-
-        // Associate Videos
-        this.Esentence.associateVideos(input);
+        
         return Esentence;
 
     }
-
-    
-    public JsonInput processJson2( JsonInput input) {
+     
+      public ESentence processJson(JsonInput input) {
 
         this.input=input;
         String Sentence = input.getVideo().getNls().trim();
         String Language=input.getVideo().getLanguage();
 
-        System.out.println("Recieved: " + Sentence + "  Lang:" + Language);
+        logger.info("Recieved: " + Sentence + "  Lang:" + Language);
 
         
         
-        // SENTENCE
-        this.Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
+        // Create E SENTENCE
+        ESentence Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
         //BABELNET
         BabelNetInterface.callBabelNet(Esentence, Language);
 
         // Associate Videos
-        this.Esentence.associateVideos(input);
-        return input;
+        Esentence.associateVideos(input);
+        return Esentence;
 
     }
+  
+    /*
+    public ESentence processJson( JsonInput input) {
+    
+    this.input=input;
+    String Sentence = input.getVideo().getNls().trim();
+    String Language=input.getVideo().getLanguage();
+    
+    System.out.println("Recieved: " + Sentence + "  Lang:" + Language);
+    
+    // SENTENCE
+    this.Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
+    //BABELNET
+    BabelNetInterface.callBabelNet(Esentence, Language);
+    
+    // Associate Videos
+    this.Esentence.associateVideos(input);
+    return Esentence;
+    
+    }*/
+    
+   
 
     
     
+    /*
      public static void print(List<ESentence> sentences) {
 
         for (ESentence sentence : sentences) {
@@ -121,6 +114,27 @@ public class EasyTVInterface {
          print(sentences);
      
      }
+*/
+
+
+    public JsonInput getInput() {
+        return input;
+    }
+
+    public void setInput(JsonInput input) {
+        this.input = input;
+    }
+
+    public NLPInterface getNlpinterface() {
+        return Nlpinterface;
+    }
+
+    public void setNlpinterface(NLPInterface Nlpinterface) {
+        this.Nlpinterface = Nlpinterface;
+    }
     
+     
+     
+     
     
 }
