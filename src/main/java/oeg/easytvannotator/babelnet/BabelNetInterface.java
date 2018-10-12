@@ -71,9 +71,9 @@ public class BabelNetInterface {
 
         logger.info("Babelnet Call: Word-" + word + " Lang-" + lang + " POS-" + pos);
 
-        List<BabelSynset> synsets;
+        List<BabelSynset> synsets=null;
 
-        synsets = BabelDatabase.getConcept(word, pos.toString(), lang.toString());
+        //synsets = BabelDatabase.getConcept(word, pos.toString(), lang.toString());
 
         if (synsets != null) {
             logger.info("synsets already identified");
@@ -108,11 +108,11 @@ public class BabelNetInterface {
             }
             
             
-            BabelDatabase.addConcept(word, pos.toString(), lang.toString(), synsets);
+            //BabelDatabase.addConcept(word, pos.toString(), lang.toString(), synsets);
         } catch (Exception ex) {
-            logger.error(ex);
-            logger.error(ex.toString());
-            initInstance();
+            logger.error("Error in BabelNet Communication",ex);
+            logger.error(ex.getCause().toString());
+            //initInstance();
             
         }
 
