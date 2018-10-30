@@ -23,7 +23,7 @@ public class ExecutionSentence {
     public static void main(String[] args) throws UnsupportedEncodingException, IOException {
 
         
-        EasyTVInterface interf = new EasyTVInterface("");
+        EasyTVInterface interf = new EasyTVInterface("","",false);
         String string=""; String Lang="";
         ESentence es= null;
        //String InputFile = "Ο δάσκαλος εξήγησε το μάθημα στην τάξη";   String Lang = "EL";

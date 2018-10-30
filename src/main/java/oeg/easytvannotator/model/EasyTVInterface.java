@@ -20,14 +20,19 @@ public class EasyTVInterface {
     
     private NLPInterface Nlpinterface;
     
+    private BabelNetInterface BabelInterface;
+    
     
     static Logger logger = Logger.getLogger(EasyTVInterface.class);
     
     //public EasyTVInterface(){}
     
     
-    public EasyTVInterface(String ResourcesPath){
+    public EasyTVInterface(String ResourcesPath, String ContextPath, boolean Serviceweb){
+        
         Nlpinterface =new NLPInterface(ResourcesPath);
+
+        BabelInterface= new BabelNetInterface(ContextPath,Serviceweb);
         
     }
     
@@ -36,37 +41,35 @@ public class EasyTVInterface {
 
         Sentence = Sentence.trim();
         logger.info("Recieved: " + Sentence + "  Lang:" + Language);
-        
-        
+
         // Create E SENTENCE
         ESentence Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
         //BABELNET
-        BabelNetInterface.callBabelNet(Esentence, Language);
+        BabelInterface.callBabelNet(Esentence, Language);
         
         return Esentence;
-
     }
      
-      public ESentence processJson(JsonInput input) {
+    public ESentence processJson(JsonInput input) {
 
         this.input=input;
         String Sentence = input.getVideo().getNls().trim();
         String Language=input.getVideo().getLanguage();
 
         logger.info("Recieved: " + Sentence + "  Lang:" + Language);
-
-        
-        
+     
         // Create E SENTENCE
         ESentence Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
         //BABELNET
-        BabelNetInterface.callBabelNet(Esentence, Language);
+        BabelInterface.callBabelNet(Esentence, Language);
 
         // Associate Videos
         Esentence.associateVideos(input);
         return Esentence;
 
     }
+      
+      
   
     /*
     public ESentence processJson( JsonInput input) {

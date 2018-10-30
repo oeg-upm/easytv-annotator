@@ -8,6 +8,7 @@ package oeg.easytvannotator.model;
 import it.uniroma1.lcl.babelnet.BabelSynset;
 import java.util.ArrayList;
 import java.util.List;
+import oeg.easytvannotator.babelnet.BabelNetSynset;
 
 /**
  *
@@ -30,7 +31,7 @@ public class SignLanguageSegment {
     public String NE;
     
     public  List<BabelSynset> WordSynsets;
-    public List<BabelSynset> LemmaSynsets;
+    public List<BabelNetSynset> LemmaSynsets;
     
     public  List<String> WordBabelblySemanticAnnotations;
     public List<String> LemmaBabelblySemanticAnnotations;
@@ -130,11 +131,11 @@ public class SignLanguageSegment {
         this.WordSynsets = WordSynsets;
     }
 
-    public List<BabelSynset> getLemmaSynsets() {
+    public List<BabelNetSynset> getLemmaSynsets() {
         return LemmaSynsets;
     }
 
-    public void setLemmaSynsets(List<BabelSynset> LemmaSynsets) {
+    public void setLemmaSynsets(List<BabelNetSynset> LemmaSynsets) {
         this.LemmaSynsets = LemmaSynsets;
     }
 

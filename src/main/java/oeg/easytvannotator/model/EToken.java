@@ -5,13 +5,13 @@
  */
 package oeg.easytvannotator.model;
 
-import it.uniroma1.lcl.babelnet.BabelExternalResource;
 import it.uniroma1.lcl.babelnet.BabelSense;
 import it.uniroma1.lcl.babelnet.BabelSynset;
 import it.uniroma1.lcl.kb.ExternalResource;
 import java.util.ArrayList;
 import java.util.List;
 import oeg.easytvannotator.babelnet.BabelLangInterface;
+import oeg.easytvannotator.babelnet.BabelNetSynset;
 
 /**
  *
@@ -28,7 +28,7 @@ public class EToken {
     public String NE;
     
     public  List<BabelSynset> WordSynsets;
-    public List<BabelSynset> LemmaSynsets;
+    public List<BabelNetSynset> LemmaSynsets;
     
     public  List<String> WordBabelblySemanticAnnotations;
     public List<String> LemmaBabelblySemanticAnnotations;
@@ -56,7 +56,7 @@ public class EToken {
 
     public String createCSVLine() {
         String cell1= "\""+this.Word+"|"+this.getSynsetys(WordSynsets) +"\"";
-        String cell2= "\""+this.Lemma+"|"+this.getSynsetys(LemmaSynsets)+"\"";
+        String cell2= "\""+this.Lemma+"|"+"NULL"+"\"";
         String cell3= "\""+this.Word+"|"+this.getBabelflyAnnotations(WordBabelblySemanticAnnotations)+"\"";
         String cell4= "\""+this.Lemma+"|"+this.getBabelflyAnnotations(LemmaBabelblySemanticAnnotations)+"\"";
         
@@ -69,15 +69,15 @@ public class EToken {
         String s="";
         System.out.println(this.Lemma);
         
-       for(BabelSynset syn: LemmaSynsets){
-          BabelSense sense= syn.getMainSense(BabelLangInterface.getLangType(Language)).get();
+       for(BabelNetSynset syn: LemmaSynsets){
+          BabelSense sense= syn.getMainSense();
           
          
           ExternalResource rc=new ExternalResource() {};
           
           //  "http://babelnet.org/rdf/maestro_ES/s00046958n"
                   
-            String id= syn.getID().toString().replace("bn:", "");
+            String id= syn.ID.replace("bn:", "");
             String ss="  http://babelnet.org/rdf/s"+id + "  --   "+    "http://babelnet.org/rdf/"+parseLemma(sense.getFullLemma())+"_"+sense.getLanguage().toString()+"/s"+id;
             //System.out.println(ss);
         }
@@ -128,6 +128,7 @@ public class EToken {
 
     public void cleanSynsets() {
         
+        /*
         List <BabelSynset> newSynsetList=new ArrayList();
         for(BabelSynset syn: this.WordSynsets){
         
@@ -138,17 +139,18 @@ public class EToken {
             
         }
         this.WordSynsets=newSynsetList;
+        */
+        List <BabelNetSynset> newSynsetList=new ArrayList();
+        for(BabelNetSynset syn: this.LemmaSynsets){
         
-        newSynsetList=new ArrayList();
-        for(BabelSynset syn: this.LemmaSynsets){
-        
-            String Type= syn.getType().toString();
-            if((!Type.equals("Named Entity")) ){
+            String Type= syn.Type.toLowerCase();
+            if( (!Type.equals("named entity")) ){
                 newSynsetList.add(syn);
             }
             
         }
         this.LemmaSynsets=newSynsetList;
+
         
     }
     

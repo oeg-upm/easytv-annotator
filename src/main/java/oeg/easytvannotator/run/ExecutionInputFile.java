@@ -39,7 +39,7 @@ public class ExecutionInputFile {
         String InputFile = "InputFile.csv";
 
         
-        EasyTVInterface inter= new EasyTVInterface("");
+        EasyTVInterface inter= new EasyTVInterface("","",false);
         
         BufferedReader br = null;
         File fr = new File(InputFile);

@@ -35,7 +35,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import oeg.easytvannotator.babelnet.BabelNetInterface;
-import static oeg.easytvannotator.babelnet.BabelNetInterface.bnInstance;
+import oeg.easytvannotator.babelnet.BabelNetSynset;
 
 /**
  *
@@ -43,16 +43,109 @@ import static oeg.easytvannotator.babelnet.BabelNetInterface.bnInstance;
  */
 public class BabelNetDemo {
     
+    public static BabelNet bnInstance;
+    
     
      
     public static void main(String [] args) throws IOException{
     
      //testQuery();
      
-     callBabelNetWordPOS("casa", Language.ES ,UniversalPOS.NOUN);
+     callBabelNetWordPOS("vez", Language.ES ,UniversalPOS.NOUN);
      
      //callBabelNetWord("anoche", Language.ES);
     }
+    
+    
+    public static List<BabelSynset> callBabelNetWordPOS(String word, Language lang, UniversalPOS pos)  {
+
+        System.out.println("Babelnet Call: Word-"+word+" Lang-"+lang+" POS-"+pos);
+        
+        
+       
+        List<BabelSynset> synsets =new ArrayList();
+         
+        try {
+            if (bnInstance == null) {
+                bnInstance = BabelNet.getInstance();
+            }
+            
+            //,BabelSenseSource.WN,BabelSenseSource.WIKIDATA,BabelSenseSource.MCR_ES)
+
+        BabelNetQuery query = new BabelNetQuery.Builder(word)
+	.POS(pos)
+	.from(lang)
+        
+                
+        //.sources(Arrays.asList(BabelSenseSource.BABELNET,BabelSenseSource.WN,BabelSenseSource.WIKIDATA))
+        //        .to(Arrays.asList(Language.EN))
+        .build();
+                
+       synsets =  bnInstance.getSynsets(query);
+       
+       //transform(synsets,word,lang);
+       
+       System.out.println("Results:"+synsets.size());
+       
+       System.out.println("-------------------------");
+        
+       
+       
+       for (BabelSynset synset : synsets) {
+           //System.out.println(synset.isKeyConcept());
+           System.out.println("Key:"+synset.isKeyConcept()+";  Synset ID: " + synset.getID()+  "; TYPE: " + synset.getType()+  "  MAIN SENSE ES: " + synset.getSenses().size() );
+           
+           System.out.println(synset.getMainSense().get().getFullLemma());
+           
+        //System.out.println("Synset ID: " + synset.getID()+  "; TYPE: " + synset.getType()+  "  MAIN SENSE ES: " + synset.getMainSense(lang) + synset.getMainSense(Language.ES) +"  MAIN SENSE EN:"+synset.getMainSense(Language.EN) );
+        
+       }
+       
+       
+       System.out.println("-------------------------");
+       Collections.sort(synsets, new BabelSynsetComparator(word));
+       for (BabelSynset synset : synsets) {
+        System.out.println("Key:"+synset.isKeyConcept()+";  Synset ID: " + synset.getID()+  "; TYPE: " + synset.getType()+  "  MAIN SENSE ES: " + synset.getMainSense(lang) );
+               
+       
+       }
+
+         
+           
+        } catch (Exception ex) {
+            Logger.getLogger(BabelNetInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        if(synsets.size()>4){
+            return synsets.subList(0, 4);
+        }
+        
+        return synsets;
+    }
+     
+    
+    public static void transform(List<BabelSynset>list, String word, Language lang){
+    
+        List <BabelNetSynset> lis= new ArrayList();
+        
+        for(BabelSynset sin: list){
+            
+            lis.add(new BabelNetSynset(sin,word,lang));
+            
+        
+        }
+        
+        Collections.sort(lis);
+        
+        for(BabelNetSynset sin:lis){
+        
+                System.out.println(sin.ID +"  "+sin.SimpleLemma+sin.isKey);
+        }
+        
+    
+    }
+    
     
     public static List<BabelSynset> callBabelNetWord(String word, Language lang)  {
 
@@ -101,51 +194,6 @@ public class BabelNetDemo {
         return synsets;
     }
 
-     public static List<BabelSynset> callBabelNetWordPOS(String word, Language lang, UniversalPOS pos)  {
-
-        System.out.println("Babelnet Call: Word-"+word+" Lang-"+lang+" POS-"+pos);
-        
-        
-       
-        List<BabelSynset> synsets =new ArrayList();
-         
-        try {
-            if (bnInstance == null) {
-                bnInstance = BabelNet.getInstance();
-            }
-            
-            //,BabelSenseSource.WN,BabelSenseSource.WIKIDATA,BabelSenseSource.MCR_ES)
-
-        BabelNetQuery query = new BabelNetQuery.Builder(word)
-	.POS(pos)
-	.from(lang)
-                
-        .sources(Arrays.asList(BabelSenseSource.BABELNET,BabelSenseSource.WN,BabelSenseSource.WIKIDATA))
-                .to(Arrays.asList(Language.EN))
-        .build();
-                
-       synsets =  bnInstance.getSynsets(query);
-       
-       System.out.println("Results:"+synsets.size());
-       Collections.sort(synsets, new BabelSynsetComparator(word));
-       for (BabelSynset synset : synsets) {
-           System.out.println(synset.isKeyConcept());
-         //  System.out.println(synset.);
-            System.out.println("Synset ID: " + synset.getID()+  "; TYPE: " + synset.getType()+  "  MAIN SENSE ES: " + synset.getMainSense(lang) + synset.getMainSense(Language.ES) +"  MAIN SENSE EN:"+synset.getMainSense(Language.EN) );
-        }
-            
-           
-        } catch (Exception ex) {
-            Logger.getLogger(BabelNetInterface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        
-        if(synsets.size()>4){
-            return synsets.subList(0, 4);
-        }
-        
-        return synsets;
-    }
      
      
     public static void testQuery() throws IOException {
