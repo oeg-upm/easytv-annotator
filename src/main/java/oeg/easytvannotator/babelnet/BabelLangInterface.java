@@ -41,6 +41,9 @@ public class BabelLangInterface {
             return Language.CA;
         }
 
+        if (Lang.equals("CAT")) {
+            return Language.CA;
+        }
         return Language.EN;
 
     }

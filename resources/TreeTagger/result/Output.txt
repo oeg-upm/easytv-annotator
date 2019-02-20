@@ -1,7 +1,8 @@
-Ο	AtDfMaSgNm	ο
-δάσκαλος	NoCmMaSgNm	δάσκαλος
-εξήγησε	VbMnIdPa03SgPeAv	εξηγώ
-το	AtDfNeSgAc	ο
-μάθημα	NoCmNeSgAc	μάθημα
-στην	AsPpPaFeSgAc	στου
-τάξη	NoCmFeSgAc	τάξη
+en	ADP.Prep	en
+aquesta	DET.Fem.Sing.Dem	aquest
+cova	NOUN.Fem.Sing	cova
+viu	VERB.Ind.Sing.3.Pres.Fin	viure
+una	DET.Fem.Sing.Ind	un
+óssa	ADJ.Fem.Sing	óssa
+rosa	NOUN.Fem.Sing	rosa
+relaxadament	ADV	relaxadament

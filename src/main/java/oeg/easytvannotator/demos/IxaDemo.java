@@ -11,7 +11,6 @@ import eus.ixa.ixa.pipe.pos.Annotate;
 import eus.ixa.ixa.pipe.pos.CLI;
 import ixa.kaflib.Entity;
 import ixa.kaflib.KAFDocument;
-import ixa.kaflib.Term;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -19,7 +18,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import ixa.kaflib.Term;
@@ -35,16 +33,10 @@ import ixa.kaflib.Statement;
  */
 public class IxaDemo {
     
-    
-    
- 
-    
-
     String PosModel;
     String lemmatizerModel;
     String NERModel;
     String ParseModel;
-   
     String language;
     String kafVersion;
 

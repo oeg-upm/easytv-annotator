@@ -1,6 +1,6 @@
 @echo off
 
-set TAGDIR=D:\OEG\PROYECTOS\EasyTV\EASY-TV\EasyTranslator4\resources\TreeTagger
+set TAGDIR=C:\Users\Pablo\Documents\GitHub\easytv-annotator\resources\TreeTagger
 REM set TAGDIR="%~3" 
 
 set BIN="%TAGDIR%\bin"

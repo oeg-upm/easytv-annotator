@@ -32,9 +32,14 @@ public class TreeTaggerInterface implements NLPApi{
     
     String Path;
     
+    String batFile;
     
-    public TreeTaggerInterface(String path){
+    
+    public TreeTaggerInterface(String path, String Language){
         Path=path;
+        
+        batFile=Language;
+        //catalan
     
     }
     
@@ -48,9 +53,14 @@ public class TreeTaggerInterface implements NLPApi{
             
             //SystemUtils.IS_OS_LINUX  SystemUtils.IS_OS_WINDOWS
             if(SystemUtils.IS_OS_WINDOWS){
-                System.out.println("sfsdf");
-            sendCommandWindows() ;
-            }else{
+                System.out.println("------");
+                sendCommandWindows() ;
+            }
+            
+            
+            if(SystemUtils.IS_OS_LINUX){
+                System.out.println("--++--");
+                sendCommandWindows() ;
             
             }
             
@@ -72,7 +82,7 @@ public class TreeTaggerInterface implements NLPApi{
     public void createTreeTaggerInput( String Text ) throws UnsupportedEncodingException, FileNotFoundException, IOException{
     
         
-        File file = new File(TreeTaggerDir.getAbsolutePath()+"/result/Input.txt");
+        File file = new File(TreeTaggerDir.getAbsolutePath()+"\\result\\Input.txt");
         Writer Writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(file), "UTF8"));
          Writer.append(Text);
@@ -85,7 +95,7 @@ public class TreeTaggerInterface implements NLPApi{
     
     public void sendCommandWindows() throws IOException, InterruptedException{
       
-        String bat= TreeTaggerDir.getAbsolutePath()+"/bin/tag-greek.bat";
+        String bat= TreeTaggerDir.getAbsolutePath()+"/bin/tag-"+ batFile +".bat";
         String Input= TreeTaggerDir.getAbsolutePath()+"/result/Input.txt";
         String Output=  TreeTaggerDir.getAbsolutePath()+"/result/Output.txt";
         
@@ -108,6 +118,32 @@ public class TreeTaggerInterface implements NLPApi{
     
     }
     
+    
+    
+    public void sendCommandLinux() throws IOException, InterruptedException{
+      
+        String bat= TreeTaggerDir.getAbsolutePath()+"/bin/tag-"+ batFile +".bat";
+        String Input= TreeTaggerDir.getAbsolutePath()+"/result/Input.txt";
+        String Output=  TreeTaggerDir.getAbsolutePath()+"/result/Output.txt";
+        
+        System.out.println("cmd /c   \""+bat+"\" "+Input+" "+Output);
+        Process pro = Runtime.getRuntime().exec("   \""+bat+"\" "+Input+" "+Output);
+
+       
+        BufferedReader in = new BufferedReader(new InputStreamReader(pro.getErrorStream()));
+        String line;
+        while ((line = in.readLine()) != null) {
+          
+            System.out.println(line);
+        }
+        pro.waitFor();
+        //System.out.println("ok!");
+
+        in.close();
+
+
+    
+    }
      
   
    

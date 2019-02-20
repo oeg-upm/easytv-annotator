@@ -109,6 +109,31 @@ public class BabelPosInterface {
             
             
         }
+        
+        
+        if (Lang.equals("CA")) {
+            
+            if (pos.startsWith("ADJ")) {
+                return UniversalPOS.ADJ;
+
+            }
+
+            if (pos.startsWith("VERB")) {
+                return UniversalPOS.VERB;
+
+            }
+            
+            if (pos.startsWith("NOUN")) {
+                return UniversalPOS.NOUN;
+
+            }
+
+            
+            
+           
+            
+            
+        }
 
         return null;
 

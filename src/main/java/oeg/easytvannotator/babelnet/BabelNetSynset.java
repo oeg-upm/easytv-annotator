@@ -42,6 +42,17 @@ public class BabelNetSynset implements Comparable<BabelNetSynset>  {
         MainSense= synset.getMainSense(BabelLangInterface.getLangType(Language)).get();
         SimpleLemma = parseLemma(MainSense.getSimpleLemma());
         
+    
+    }
+    
+    public BabelNetSynset(String type, boolean Key,String OriginalWord,String lemma,Language lang){
+    
+        this.Language=lang.toString();
+        this.OriginalWord = OriginalWord;
+        isKey= Key;
+        Type = type;
+        SimpleLemma = lemma;
+        
         
         
       
@@ -52,6 +63,7 @@ public class BabelNetSynset implements Comparable<BabelNetSynset>  {
     
     
     }
+    
     
     public BabelSense getMainSense(){
     
@@ -66,38 +78,48 @@ public class BabelNetSynset implements Comparable<BabelNetSynset>  {
     }
 
     @Override
-    public int compareTo(BabelNetSynset o) {
+    public int compareTo(BabelNetSynset Babel) {
         
-
-        if(Type.toLowerCase().equals("concept")){
+        // Concepts better
+        if((Babel.Type.toLowerCase().equals("concept")) && !(this.Type.toLowerCase().equals("concept"))){
+            return 1;
+        }
         
-            if(SimpleLemma.toLowerCase().equals(OriginalWord.toLowerCase())){
-            
-                if(isKey){
-                    return -3;
-                
-                }else{
-                   
-                    return -1;
-                }
-                   
-                
-            
-            }else{
-            
-                return 1;
-            
-            }
-        
-            
-            
-        }else{
-        
-            return 3;
-        
+        if(!(Babel.Type.toLowerCase().equals("concept")) && (this.Type.toLowerCase().equals("concept"))){
+            return -1;
         }
         
         
+        // Similarity
+        boolean similarity1 = Babel.SimpleLemma.toLowerCase().equals(Babel.OriginalWord.toLowerCase());
+        boolean similarity2 = this.SimpleLemma.toLowerCase().equals(this.OriginalWord.toLowerCase());
+        
+        
+        if((similarity1) && !(similarity2)){
+            return 1;
+        }
+        
+        if(!(similarity1) && (similarity2)){
+            return -1;
+        }
+        
+        
+        // keys better
+        
+        if((Babel.isKey) && !(this.isKey)){
+            return 1;
+        }
+        
+        if(!(Babel.isKey) && (this.isKey)){
+            return -1;
+        }
+        
+        return 0;
+       
+    }
+
+    public String getInfo() {
+       return this.OriginalWord +" "+this.SimpleLemma +" "+this.Language +"  "+this.Type +" "+this.isKey  ;
     }
     
 }

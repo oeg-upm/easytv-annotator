@@ -23,7 +23,7 @@ public class NLPInterface {
     private ItalianIxaInterface ItalianLib;
     private StanfordInterface EnglishLib;
     private TreeTaggerInterface GreekLib;
-    
+    private TreeTaggerInterface CatalanLib;
     
     public NLPInterface(String RootPath){
     
@@ -34,8 +34,11 @@ public class NLPInterface {
         
         EnglishLib= new StanfordInterface();
         
-        GreekLib= new TreeTaggerInterface(RootPath);
+        GreekLib= new TreeTaggerInterface(RootPath, "greek");
     
+        CatalanLib= new TreeTaggerInterface(RootPath, "catalan");
+        
+        
     }
     
     
@@ -53,7 +56,8 @@ public class NLPInterface {
             return ItalianLib.parseSentence(Sentence, Language);
         }
 
-        if (Language.equals("cat")) {
+        if (Language.equals("ca")) {
+            return CatalanLib.parseSentence(Sentence, Language);
         }
 
         if (Language.equals("el")) {
