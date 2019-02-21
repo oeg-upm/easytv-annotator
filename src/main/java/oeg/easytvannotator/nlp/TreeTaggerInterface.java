@@ -60,7 +60,7 @@ public class TreeTaggerInterface implements NLPApi{
             
             if(SystemUtils.IS_OS_LINUX){
                 System.out.println("--++--");
-                sendCommandWindows() ;
+                sendCommandLinux() ;
             
             }
             
@@ -82,7 +82,7 @@ public class TreeTaggerInterface implements NLPApi{
     public void createTreeTaggerInput( String Text ) throws UnsupportedEncodingException, FileNotFoundException, IOException{
     
         
-        File file = new File(TreeTaggerDir.getAbsolutePath()+"\\result\\Input.txt");
+        File file = new File(TreeTaggerDir.getAbsolutePath()+"/result/Input.txt");
         Writer Writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(file), "UTF8"));
          Writer.append(Text);
@@ -122,14 +122,16 @@ public class TreeTaggerInterface implements NLPApi{
     
     public void sendCommandLinux() throws IOException, InterruptedException{
       
-        String bat= TreeTaggerDir.getAbsolutePath()+"/bin/tag-"+ batFile +".bat";
+        String bat= TreeTaggerDir.getAbsolutePath()+"/cmd/tree-tagger-"+ batFile+"-file";
         String Input= TreeTaggerDir.getAbsolutePath()+"/result/Input.txt";
         String Output=  TreeTaggerDir.getAbsolutePath()+"/result/Output.txt";
         
-        System.out.println("cmd /c   \""+bat+"\" "+Input+" "+Output);
-        Process pro = Runtime.getRuntime().exec("   \""+bat+"\" "+Input+" "+Output);
-
+        System.out.println(bat+" "+Input+" "+Output);
+        //Process pro = Runtime.getRuntime().exec("   \""+bat+"\" "+Input+" "+Output);
+        //Process pro = Runtime.getRuntime().exec("ls -la", null,new File("./src"));
        
+        Process pro = Runtime.getRuntime().exec(bat+" "+Input+" "+Output, null,new File(TreeTaggerDir.getAbsolutePath()));
+        
         BufferedReader in = new BufferedReader(new InputStreamReader(pro.getErrorStream()));
         String line;
         while ((line = in.readLine()) != null) {
@@ -165,6 +167,7 @@ public class TreeTaggerInterface implements NLPApi{
             String word=fields[0];
             String pos=fields[1];
             String lem=fields[2];
+            if(lem.equals("<unknown>")){lem=word;}
             System.out.println(word +"  "+pos+"  "+lem+"  ");
         
           
@@ -198,7 +201,9 @@ public class TreeTaggerInterface implements NLPApi{
                 System.out.println("Windows");
                 sendCommandWindows() ;
             }else{
-            
+                
+                System.out.println("Linux");
+                sendCommandLinux() ;
             }
             
             

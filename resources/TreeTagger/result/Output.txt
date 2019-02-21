@@ -1,8 +1,6 @@
+un	DET.Masc.Sing.Ind	un
+ós	NOUN.Masc.Sing	<unknown>
+viu	ADJ.Masc.Sing	viu
 en	ADP.Prep	en
 aquesta	DET.Fem.Sing.Dem	aquest
 cova	NOUN.Fem.Sing	cova
-viu	VERB.Ind.Sing.3.Pres.Fin	viure
-una	DET.Fem.Sing.Ind	un
-óssa	ADJ.Fem.Sing	óssa
-rosa	NOUN.Fem.Sing	rosa
-relaxadament	ADV	relaxadament

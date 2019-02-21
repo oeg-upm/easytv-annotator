@@ -26,7 +26,7 @@ public class Service {
 
          
         
-        string = "σε αυτό το σπήλαιο ζει μια λευκή αρκούδα χαλαρή";    Lang = "EL";
+           string = "un ós viu en aquesta cova";    Lang = "CA";
         es= interf.processLine(Lang, string);
         es.print();
         
