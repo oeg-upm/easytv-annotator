@@ -14,6 +14,14 @@
 
     <dependencies>
          
+        <!--- test -->
+        
+         <!--dependency>
+            <groupId>oeg.helio.core</groupId>
+            <artifactId>helio-core</artifactId>
+            <version>0.2.1</version>
+        </dependency-->
+       
         <dependency>
             <groupId>it.uniroma1.lcl.babelnet</groupId>
             <artifactId>babelnet-api</artifactId>

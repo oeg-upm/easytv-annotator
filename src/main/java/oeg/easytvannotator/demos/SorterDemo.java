@@ -16,7 +16,7 @@ import it.uniroma1.lcl.jlt.util.Language;
  *
  * @author Pablo
  */
-public class Sorter {
+public class SorterDemo {
     
     
     public static void main (String [] args){

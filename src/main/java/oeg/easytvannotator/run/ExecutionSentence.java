@@ -32,12 +32,12 @@ public class ExecutionSentence {
         
         
         string = "Ho visto questo film tre volte";    Lang = "IT";
-        es= interf.processLine(Lang, string);
+        es= interf.procesSentence(Lang, string);
         es.print();
         
         
         string = "he visto esta película tres veces";    Lang = "ES";
-        es= interf.processLine(Lang, string);
+        es= interf.procesSentence(Lang, string);
         es.print();
         
        // string = "I have watched this movie three times";    Lang = "EN";

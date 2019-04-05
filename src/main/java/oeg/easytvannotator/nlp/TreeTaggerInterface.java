@@ -16,10 +16,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import oeg.easytvannotator.model.ESentence;
 import org.apache.commons.lang.SystemUtils;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -27,6 +26,7 @@ import org.apache.commons.lang.SystemUtils;
  */
 public class TreeTaggerInterface implements NLPApi{
     
+   static Logger logger = Logger.getLogger(TreeTaggerInterface.class);
     
     File TreeTaggerDir;
     
@@ -53,13 +53,14 @@ public class TreeTaggerInterface implements NLPApi{
             
             //SystemUtils.IS_OS_LINUX  SystemUtils.IS_OS_WINDOWS
             if(SystemUtils.IS_OS_WINDOWS){
-                System.out.println("------");
+                logger.info("TreeTagger Under Windows");
                 sendCommandWindows() ;
             }
             
             
             if(SystemUtils.IS_OS_LINUX){
-                System.out.println("--++--");
+                
+                logger.info("TreeTagger Under Linux");
                 sendCommandLinux() ;
             
             }
@@ -69,11 +70,9 @@ public class TreeTaggerInterface implements NLPApi{
             
             
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(TreeTaggerInterface.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(TreeTaggerInterface.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(TreeTaggerInterface.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error(ex);
+        } catch (IOException | InterruptedException ex) {
+            logger.error(ex);
         }
         
     }
@@ -83,6 +82,7 @@ public class TreeTaggerInterface implements NLPApi{
     
         
         File file = new File(TreeTaggerDir.getAbsolutePath()+"/result/Input.txt");
+        logger.info("Creating input File :"+file.getAbsolutePath());
         Writer Writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(file), "UTF8"));
          Writer.append(Text);
@@ -96,21 +96,29 @@ public class TreeTaggerInterface implements NLPApi{
     public void sendCommandWindows() throws IOException, InterruptedException{
       
         String bat= TreeTaggerDir.getAbsolutePath()+"/bin/tag-"+ batFile +".bat";
-        String Input= TreeTaggerDir.getAbsolutePath()+"/result/Input.txt";
-        String Output=  TreeTaggerDir.getAbsolutePath()+"/result/Output.txt";
+        String Input= "\""+TreeTaggerDir.getAbsolutePath()+"/result/Input.txt\"";
+        String Output= "\""+ TreeTaggerDir.getAbsolutePath()+"/result/Output.txt\"";
         
-        System.out.println("cmd /c   \""+bat+"\" "+Input+" "+Output);
-        Process pro = Runtime.getRuntime().exec("cmd /c   \""+bat+"\" "+Input+" "+Output);
+        logger.info("Executing command:   \""+bat+"\" "+Input+" "+Output);
+        Process pro = Runtime.getRuntime().exec("  \""+bat+"\" "+Input+" "+Output,null,new File(TreeTaggerDir.getAbsolutePath()));
 
+        
+        /*
+        String Input= TreeTaggerDir.getAbsolutePath()+"/result/Input.txt";
+        String Output=  TreeTaggerDir.getAbsolutePath()+"/result/Output.txt";   
+        Process pro = Runtime.getRuntime().exec(bat+" "+Input+" "+Output, null,new File(TreeTaggerDir.getAbsolutePath()));
+        */
+        
        
         BufferedReader in = new BufferedReader(new InputStreamReader(pro.getErrorStream()));
         String line;
         while ((line = in.readLine()) != null) {
           
-            System.out.println(line);
+            //System.out.println(line);
+            logger.info("TreeTagger output:"+line);
         }
         pro.waitFor();
-        //System.out.println("ok!");
+       
 
         in.close();
 
@@ -126,7 +134,7 @@ public class TreeTaggerInterface implements NLPApi{
         String Input= TreeTaggerDir.getAbsolutePath()+"/result/Input.txt";
         String Output=  TreeTaggerDir.getAbsolutePath()+"/result/Output.txt";
         
-        System.out.println(bat+" "+Input+" "+Output);
+        logger.info("Executing command:   \""+bat+"\" "+Input+" "+Output);
         //Process pro = Runtime.getRuntime().exec("   \""+bat+"\" "+Input+" "+Output);
         //Process pro = Runtime.getRuntime().exec("ls -la", null,new File("./src"));
        
@@ -136,14 +144,14 @@ public class TreeTaggerInterface implements NLPApi{
         String line;
         while ((line = in.readLine()) != null) {
           
-            System.out.println(line);
+             logger.info("TreeTagger output:"+line);
         }
         pro.waitFor();
-        //System.out.println("ok!");
+        
 
         in.close();
 
-
+        logger.info("TreeTagger finished");
     
     }
      
@@ -152,8 +160,9 @@ public class TreeTaggerInterface implements NLPApi{
     public ESentence  readOutput(String Text,String Lang) throws UnsupportedEncodingException, FileNotFoundException, IOException{
     
     
+       
        File file = new File(TreeTaggerDir.getAbsolutePath() + "/result/Output.txt");
-        
+        logger.info("Reading Output File :"+file.getAbsolutePath());
         BufferedReader Buffer = new BufferedReader(new InputStreamReader(
                 new FileInputStream(file), "UTF8"));
     
@@ -168,18 +177,19 @@ public class TreeTaggerInterface implements NLPApi{
             String pos=fields[1];
             String lem=fields[2];
             if(lem.equals("<unknown>")){lem=word;}
-            System.out.println(word +"  "+pos+"  "+lem+"  ");
+            logger.info("Retrieved from Treetagger:"+word +"  "+pos+"  "+lem+"  ");
         
           
             esentence.addEToken(word, pos, lem, "",Lang);
             LemmaSentence.append(lem+" ");
-            System.out.println(line);
+            //System.out.println(line);
             
         }
         esentence.OriginalText=Text;
         esentence.LematizedText= LemmaSentence.toString().trim();
         Buffer.close();
         
+        logger.info("Reading output file finished");
         return esentence;
 
     }
@@ -198,11 +208,11 @@ public class TreeTaggerInterface implements NLPApi{
             
             //SystemUtils.IS_OS_LINUX  SystemUtils.IS_OS_WINDOWS
             if(SystemUtils.IS_OS_WINDOWS){
-                System.out.println("Windows");
+                 logger.info("TreeTagger Under Windows");
                 sendCommandWindows() ;
             }else{
                 
-                System.out.println("Linux");
+                  logger.info("TreeTagger Under Linux");
                 sendCommandLinux() ;
             }
             
@@ -210,14 +220,11 @@ public class TreeTaggerInterface implements NLPApi{
             return readOutput(Sentence,Language);
             
             
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(TreeTaggerInterface.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(TreeTaggerInterface.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(TreeTaggerInterface.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (FileNotFoundException ex) {
+            logger.error(ex);
+        } catch (IOException | InterruptedException ex) {
+            logger.error(ex);
         }
-     
         
         return new ESentence();
         

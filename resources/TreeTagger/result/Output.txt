@@ -1,6 +1,7 @@
-un	DET.Masc.Sing.Ind	un
-ós	NOUN.Masc.Sing	<unknown>
-viu	ADJ.Masc.Sing	viu
-en	ADP.Prep	en
-aquesta	DET.Fem.Sing.Dem	aquest
-cova	NOUN.Fem.Sing	cova
+Σε	AsPpSp	σε
+αυτή	PnDmFe03SgAc	αυτός
+τη	AtDfFeSgAc	ο
+σπηλιά	NoCmFeSgAc	σπηλιά
+ζει	VbMnIdPr03SgIpAv	ζώ
+μια	AtIdFeSgAc	ένας
+αρκούδα	NoCmFeSgAc	αρκούδα

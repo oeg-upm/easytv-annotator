@@ -8,7 +8,7 @@ package oeg.easytvannotator.babelnet;
 import it.uniroma1.lcl.babelnet.BabelSense;
 import it.uniroma1.lcl.babelnet.BabelSynset;
 import it.uniroma1.lcl.jlt.util.Language;
-import java.util.Comparator;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -16,7 +16,7 @@ import java.util.Comparator;
  */
 public class BabelNetSynset implements Comparable<BabelNetSynset>  {
     
-    
+    static Logger logger = Logger.getLogger(BabelNetSynset.class);
     public boolean isKey;
     public String ID;
     public String Type;
@@ -31,6 +31,8 @@ public class BabelNetSynset implements Comparable<BabelNetSynset>  {
     
     public BabelSense MainSense;
     
+    public String signLanguageRepresentation="";
+    
     public BabelNetSynset(BabelSynset synset,String OriginalWord,Language lang){
     
         syn=synset;
@@ -39,8 +41,29 @@ public class BabelNetSynset implements Comparable<BabelNetSynset>  {
         isKey= synset.isKeyConcept();
         ID   = synset.getID().toString();
         Type = synset.getType().toString();
-        MainSense= synset.getMainSense(BabelLangInterface.getLangType(Language)).get();
-        SimpleLemma = parseLemma(MainSense.getSimpleLemma());
+       
+        
+        try {
+            MainSense=  synset.getMainSense(lang).get();
+        }catch(Exception e){
+        
+            logger.info("No main sense. Synset:"+ID+", isKey"+ID+", Language:"+lang+", OriginalWorld:"+OriginalWord);
+           
+        }
+        
+         try {
+            MainSense=  synset.getSenses(lang).get(0);
+        }catch(Exception e){
+        
+            logger.info("No senses. Synset:"+ID+", isKey"+ID+", Language:"+lang+", OriginalWorld:"+OriginalWord);
+            logger.info("Synset Discarded "+ID);
+            MainSense=null;
+        }
+        
+         if(MainSense!=null){
+            SimpleLemma = parseLemma(MainSense.getSimpleLemma());
+        
+         }
         
     
     }

@@ -48,7 +48,7 @@ public class IxaDemo {
     private Properties annotatePosProperties;
     private Properties annotateNEProperties;
     private Properties annotateParseProperties;
-  
+
 
     
     public static void main (String [] args) throws IOException{

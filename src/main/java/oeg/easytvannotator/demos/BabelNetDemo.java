@@ -51,12 +51,34 @@ public class BabelNetDemo {
     
      //testQuery();
      
-     callBabelNetWordPOS("vez", Language.ES ,UniversalPOS.NOUN);
+     callBabelNetWordPOS("maternity leave", Language.EN ,UniversalPOS.NOUN);
      
+     //exampletranslation();
      //callBabelNetWord("anoche", Language.ES);
     }
     
     
+    
+     public static void exampletranslation() throws IOException {
+    	BabelNet bn = BabelNet.getInstance();
+		BabelNetQuery query = new BabelNetQuery.Builder("película")
+                        .POS(UniversalPOS.NOUN)
+			.from(Language.ES)
+			.to(Arrays.asList(Language.ES))
+			.build();
+        for (BabelSynset synset : bn.getSynsets(query)) {
+            System.out.println("Synset ID: " + synset.getID());
+            
+            System.out.println(synset.getMainSense(Language.ES));
+            BabelSense s= synset.getMainSense(Language.ES).get();
+            if(s!=null){
+            System.out.println(s.getFullLemma()+"  "+s.getSimpleLemma());
+            }
+//  String a= s.getSimpleLemma();
+            
+        }
+
+    }
     public static List<BabelSynset> callBabelNetWordPOS(String word, Language lang, UniversalPOS pos)  {
 
         System.out.println("Babelnet Call: Word-"+word+" Lang-"+lang+" POS-"+pos);

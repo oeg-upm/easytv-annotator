@@ -7,7 +7,7 @@ package oeg.easytvannotator.run;
 
 import java.util.Scanner;
 import oeg.easytvannotator.demos.BabelNetDemo;
-import oeg.easytvannotator.demos.BabelflyDemo;
+import oeg.easytvannotator.demos.BabelfyDemo;
 
 /**
  *
@@ -62,7 +62,7 @@ public class ExecutionGUI {
             BabelNetDemo.callBabelNetWithStanfordParser(InputString, Language);
             
             // BABELFLY
-            BabelflyDemo.example(InputString, Language);
+            BabelfyDemo.example(InputString, Language);
             
             
             System.out.println("\n\n");

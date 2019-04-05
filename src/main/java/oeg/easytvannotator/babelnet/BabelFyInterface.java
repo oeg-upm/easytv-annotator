@@ -22,16 +22,16 @@ import oeg.easytvannotator.model.EToken;
  *
  * @author pcalleja
  */
-public class BabelFlyInterface {
+public class BabelFyInterface {
     
      
    
     public static void callBabelFly(ESentence ESentence, String Language) {
       
         // BABELFLY original
-         BabelFlyInterface.callBabelFlyOriginalWords(ESentence, Language);
+         BabelFyInterface.callBabelFlyOriginalWords(ESentence, Language);
         // BABELFLY Lemma
-        BabelFlyInterface.callBabelFlyLemmatized(ESentence, Language);
+        BabelFyInterface.callBabelFlyLemmatized(ESentence, Language);
         
         
     }

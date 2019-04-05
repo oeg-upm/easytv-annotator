@@ -52,7 +52,7 @@ public class ExecutionInputFile {
         while ((Line = br.readLine()) != null) {
 
            String[] Input = Line.split(",");
-           ESentence sent= inter.processLine(Input[0], Input[1]);
+           ESentence sent= inter.procesSentence(Input[0], Input[1]);
         }
 
         br.close();

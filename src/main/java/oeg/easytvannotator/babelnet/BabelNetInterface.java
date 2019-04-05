@@ -104,7 +104,7 @@ public class BabelNetInterface {
                     .POS(pos)
                     .from(lang)
                     // .sources(Arrays.asList(BabelSenseSource.BABELNET,BabelSenseSource.WN, BabelSenseSource.MCR_ES ,BabelSenseSource.MCR_CA,BabelSenseSource.OMWN_EL,BabelSenseSource.OMWN_IT)) //
-                    .to(Arrays.asList(Language.EN, Language.CA, Language.EL, Language.IT))
+                    .to(Arrays.asList(Language.EN, Language.CA, Language.EL, Language.IT,Language.ES))
                     .build();
 
             synsets = bnInstance.getSynsets(query);
@@ -124,6 +124,65 @@ public class BabelNetInterface {
         } catch (Exception ex) {
             logger.error("Error in BabelNet Communication",ex);
             logger.error(ex.getCause().toString());
+            //initInstance();
+            
+        }
+
+        
+
+        return synseList;
+    }
+    
+    
+    public List<BabelNetSynset> callTranslationBabelNetWordPOS(String word, Language langInput,Language langOutput, UniversalPOS pos) {
+
+        logger.info("Babelnet Translation Call: Word-" + word + " Lang-" + langInput + " POS-" + pos);
+
+        List<BabelSynset> synsets=null;
+
+        //synsets = BabelDatabase.getConcept(word, pos.toString(), lang.toString());
+        List<BabelNetSynset> synseList= null;
+        if (synsets != null) {
+            logger.info("synsets already identified");
+            return synseList;
+        }
+
+        synsets = new ArrayList();
+
+        try {
+            if (bnInstance == null) {
+                initInstance();//bnInstance = BabelNet.getInstance();
+            }
+
+            HashSet<BabelSenseSource> sets = new HashSet();
+            sets.addAll(Arrays.asList(BabelSenseSource.BABELNET, BabelSenseSource.WN, BabelSenseSource.MCR_ES, BabelSenseSource.MCR_CA, BabelSenseSource.OMWN_EL, BabelSenseSource.OMWN_IT));
+
+            BabelNetQuery query = new BabelNetQuery.Builder(word)
+                    .POS(pos)
+                    .from(langInput)
+                    // .sources(Arrays.asList(BabelSenseSource.BABELNET,BabelSenseSource.WN, BabelSenseSource.MCR_ES ,BabelSenseSource.MCR_CA,BabelSenseSource.OMWN_EL,BabelSenseSource.OMWN_IT)) //
+                    .to(Arrays.asList(langOutput))
+                    .build();
+
+            synsets = bnInstance.getSynsets(query);
+
+            
+            logger.info("BabelNet Results:" + synsets.size());
+
+            synseList= transformToBabelNetSynsets(synsets, word, langOutput);//Collections.sort(synsets, new BabelSynsetComparator(word, lang));
+
+            if (synseList.size() > 5) {
+                synseList = synseList.subList(0, 5);
+            }
+            
+            
+            
+            //BabelDatabase.addConcept(word, pos.toString(), lang.toString(), synsets);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            logger.error("Error in BabelNet Communication",ex);
+            logger.error(ex.getCause().toString());
+           
             //initInstance();
             
         }
@@ -158,6 +217,31 @@ public class BabelNetInterface {
     }
 
     
+    public void callTranslationBabelNet(ESentence Sentence, String InputLang,String OutputLang) {
+
+        Language LanguaInput = BabelLangInterface.getLangType(InputLang);
+        Language LanguaOutput = BabelLangInterface.getLangType(OutputLang);
+        
+        logger.info("Translating to :" + LanguaInput.toString() + "  " + LanguaOutput.toString());
+         
+        for (EToken token : Sentence.ListTokens) {
+
+            String POS = token.POS.toUpperCase();
+            UniversalPOS Babelpos = BabelPosInterface.getBabelPOS(POS, InputLang);
+
+            if (Babelpos != null) {
+                
+                token.LemmaSynsets = callTranslationBabelNetWordPOS(token.Lemma, LanguaInput, LanguaOutput, Babelpos);
+                token.cleanSynsets();
+
+            } else {
+                logger.info("No BabelNet search for :" + token.Word + "  " + token.POS);
+            }
+
+        }
+
+    }
+    
 
     
     public List <BabelNetSynset> transformToBabelNetSynsets(List<BabelSynset>list, String word, Language lang){
@@ -165,8 +249,11 @@ public class BabelNetInterface {
         List <BabelNetSynset> lis= new ArrayList();
         
         for(BabelSynset sin: list){
+            BabelNetSynset bab = new BabelNetSynset(sin,word,lang);
+            if(bab.MainSense!=null){
+                lis.add(bab);
+            }
             
-            lis.add(new BabelNetSynset(sin,word,lang));
             
         
         }

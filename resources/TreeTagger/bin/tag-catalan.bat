@@ -1,12 +1,16 @@
 @echo off
 
+REM set TAGDIR=C:\Users\Pablo\Documents\GitHub\easytv-annotator\resources\TreeTagger
+REM set TAGDIR="%~3" 
+
 set BIN=".\bin"
 set CMD=".\cmd"
 set LIB=".\lib"
+REM set RES="%TAGDIR%\result\Output.txt"
 
-set TAGOPT=%LIB%\greek.par -token -lemma -sgml -no-unknown
+set TAGOPT=%LIB%\catalan.par -token -lemma -sgml -no-unknown
 
-perl %CMD%\tokenize.pl "%~1" | perl %CMD%\mwl-lookup-greek.perl | %BIN%\tree-tagger %TAGOPT% > "%~2"
+perl %CMD%\tokenize.pl "%~1" |  %BIN%\tree-tagger %TAGOPT% > "%~2"
 
 REM if "%2"=="" goto label1
 REM perl %CMD%\tokenize.pl "%~1" | perl %CMD%\mwl-lookup-greek.perl | %BIN%\tree-tagger %TAGOPT% > "%~2" %RES%

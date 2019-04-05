@@ -128,21 +128,13 @@ public class EToken {
 
     public void cleanSynsets() {
         
-        /*
-        List <BabelSynset> newSynsetList=new ArrayList();
-        for(BabelSynset syn: this.WordSynsets){
-        
-            String Type= syn.getType().toString();
-            if((!Type.equals("Named Entity"))){
-                newSynsetList.add(syn);
-            }
-            
-        }
-        this.WordSynsets=newSynsetList;
-        */
+       
         List <BabelNetSynset> newSynsetList=new ArrayList();
         for(BabelNetSynset syn: this.LemmaSynsets){
         
+            if(syn.MainSense==null){
+                continue;
+            }
             String Type= syn.Type.toLowerCase();
             if( (!Type.equals("named entity")) ){
                 newSynsetList.add(syn);

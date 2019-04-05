@@ -61,7 +61,6 @@ public class NLPInterface {
         }
 
         if (Language.equals("el")) {
-      
             return GreekLib.parseSentence(Sentence, Language);
         }
         return null;

@@ -22,21 +22,21 @@ import oeg.easytvannotator.babelnet.BabelLangInterface;
  *
  * @author pcalleja
  */
-public class BabelflyDemo {
+public class BabelfyDemo {
     
        public static void main(String[] args) {
 
-        String inputText = "Yo soy ingeniero en informática";
+        String inputText = "colleage is on maternity leave, they may";
         BabelfyConstraints constraints = new BabelfyConstraints();
         SemanticAnnotation a = new SemanticAnnotation(new TokenOffsetFragment(0, 0), 
-                "bn:03083790n","http://dbpedia.org/resource/BabelNet", Source.OTHER);
+                "bn:03083790n","http://dbpedia.org/resource/BabelNet", Source.BABELFY);
         constraints.addAnnotatedFragments(a);
         BabelfyParameters bp = new BabelfyParameters();
         bp.setAnnotationResource(SemanticAnnotationResource.BN);
         bp.setMCS(MCS.ON_WITH_STOPWORDS);
-        bp.setScoredCandidates(ScoredCandidates.ALL);
+        bp.setScoredCandidates(ScoredCandidates.TOP);
         Babelfy bfy = new Babelfy(bp);
-        List<SemanticAnnotation> bfyAnnotations = bfy.babelfy(inputText, Language.ES, constraints);
+        List<SemanticAnnotation> bfyAnnotations = bfy.babelfy(inputText, Language.EN, constraints);
         
         //bfyAnnotations is the result of Babelfy.babelfy() call
         for (SemanticAnnotation annotation : bfyAnnotations) {

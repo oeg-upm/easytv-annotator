@@ -1,8 +1,12 @@
 @echo off
 
-set BIN=".\bin"
-set CMD=".\cmd"
-set LIB=".\lib"
+set TAGDIR=D:\OEG\PROYECTOS\EasyTV\EASY-TV\EasyTranslator4\resources\TreeTagger
+REM set TAGDIR="%~3" 
+
+set BIN="%TAGDIR%\bin"
+set CMD="%TAGDIR%\cmd"
+set LIB="%TAGDIR%\lib"
+set RES="%TAGDIR%\result\Output.txt"
 
 set TAGOPT=%LIB%\greek.par -token -lemma -sgml -no-unknown
 

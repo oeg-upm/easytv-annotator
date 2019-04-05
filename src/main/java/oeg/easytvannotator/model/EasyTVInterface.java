@@ -37,20 +37,60 @@ public class EasyTVInterface {
     }
     
     
-    public ESentence processLine(String Language, String Sentence) {
+    public ESentence procesSentence(String Language, String Sentence) {
 
         Sentence = Sentence.trim();
         logger.info("Recieved: " + Sentence + "  Lang:" + Language);
 
         // Create E SENTENCE
         ESentence Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
+        
+        logger.info("ESentence created: NºTokens " + Esentence.ListTokens.size());
         //BABELNET
         BabelInterface.callBabelNet(Esentence, Language);
         
         return Esentence;
     }
+    
+    
+    public ESentence processTranslation(String Language1, String Language2, String Sentence) {
+
+        Sentence = Sentence.trim();
+        logger.info("Recieved: " + Sentence + "  Lang:" + Language1+ " To Lang:  "+Language2);
+       
+        // Create E SENTENCE
+        ESentence Esentence = Nlpinterface.createESentence(Language1.toLowerCase(), Sentence);
+        
+        logger.info("ESentence created: NºTokens " + Esentence.ListTokens.size());
+        //BABELNET
+        BabelInterface.callTranslationBabelNet(Esentence, Language1,Language2);
+        
+        return Esentence;
+    }
      
     public ESentence processJson(JsonInput input) {
+
+        this.input=input;
+        String Sentence = input.getVideo().getNls().trim();
+        String Language=input.getVideo().getLanguage();
+
+        logger.info("Recieved: " + Sentence + "  Lang:" + Language);
+     
+        // Create E SENTENCE
+        ESentence Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
+        
+        logger.info("ESentence created: NºTokens " + Esentence.ListTokens.size());
+        //BABELNET
+        BabelInterface.callBabelNet(Esentence, Language);
+
+        // Associate Videos
+        Esentence.associateVideos(input);
+        return Esentence;
+
+    }
+      
+    
+    public ESentence annotateVideo(JsonInput input) {
 
         this.input=input;
         String Sentence = input.getVideo().getNls().trim();
@@ -68,57 +108,27 @@ public class EasyTVInterface {
         return Esentence;
 
     }
-      
-      
-  
-    /*
-    public ESentence processJson( JsonInput input) {
     
-    this.input=input;
-    String Sentence = input.getVideo().getNls().trim();
-    String Language=input.getVideo().getLanguage();
-    
-    System.out.println("Recieved: " + Sentence + "  Lang:" + Language);
-    
-    // SENTENCE
-    this.Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
-    //BABELNET
-    BabelNetInterface.callBabelNet(Esentence, Language);
-    
-    // Associate Videos
-    this.Esentence.associateVideos(input);
-    return Esentence;
-    
-    }*/
-    
-   
+    public ESentence annotateTranslateVideo(JsonInput input,String translationlang) {
 
-    
-    
-    /*
-     public static void print(List<ESentence> sentences) {
+        this.input=input;
+        String Sentence = input.getVideo().getNls().trim();
+        String Language=input.getVideo().getLanguage();
 
-        for (ESentence sentence : sentences) {
+        logger.info("Recieved: " + Sentence + "  Lang:" + Language +" Translation: "+translationlang);
+     
+        // Create E SENTENCE
+        ESentence Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
+        //BABELNET
+        BabelInterface.callTranslationBabelNet(Esentence, Language,translationlang);
 
-            System.out.println("Sentence: " + sentence.OriginalText);
-
-            for (EToken token : sentence.ListTokens) {
-
-                String s = token.printResultsBabel();
-
-            }
-
-        }
+        // Associate Videos
+        Esentence.associateVideos(input);
+        return Esentence;
 
     }
-     
-         
-     public static void printSentences(){
-         print(sentences);
-     
-     }
-*/
-
+    
+  
 
     public JsonInput getInput() {
         return input;
