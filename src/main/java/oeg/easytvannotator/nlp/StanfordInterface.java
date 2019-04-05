@@ -83,8 +83,8 @@ public class StanfordInterface implements NLPApi {
                 token.set(CoreAnnotations.StemAnnotation.class, stemmer.stem(token.word()));
                 String word = token.get(CoreAnnotations.TextAnnotation.class);
 
-                String pos = token.get(CoreAnnotations.PartOfSpeechAnnotation.class);
-                String lem = token.get(CoreAnnotations.LemmaAnnotation.class);
+                String pos =  token.get(CoreAnnotations.PartOfSpeechAnnotation.class);
+                String lem =  token.get(CoreAnnotations.LemmaAnnotation.class);
                 String stem = token.get(CoreAnnotations.StemAnnotation.class);
                 logger.info(word + "  " + pos + "  " + lem + "  " + stem);
 
@@ -92,7 +92,6 @@ public class StanfordInterface implements NLPApi {
                 tokenSentence.append(word + " ");
                 LemmaSentence.append(lem + " ");
             }
-
         }
 
         esentence.OriginalText = Sentence;

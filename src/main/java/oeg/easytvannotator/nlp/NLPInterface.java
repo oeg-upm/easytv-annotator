@@ -28,15 +28,16 @@ public class NLPInterface {
     public NLPInterface(String RootPath){
     
         this.RootPath=RootPath;
+        
         SpanishLib = new SpanishIxaInterface(RootPath);
 
         ItalianLib = new ItalianIxaInterface(RootPath);
         
-        EnglishLib= new StanfordInterface();
+        EnglishLib = new StanfordInterface();
         
-        GreekLib= new TreeTaggerInterface(RootPath, "greek");
+        GreekLib = new TreeTaggerInterface(RootPath, "greek");
     
-        CatalanLib= new TreeTaggerInterface(RootPath, "catalan");
+        CatalanLib = new TreeTaggerInterface(RootPath, "catalan");
         
         
     }

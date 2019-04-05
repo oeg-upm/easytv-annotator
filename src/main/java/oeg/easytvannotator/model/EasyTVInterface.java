@@ -5,6 +5,7 @@
  */
 package oeg.easytvannotator.model;
 
+import oeg.easytvannotator.model.input.JsonSignLanguageAnnotationInput;
 import oeg.easytvannotator.babelnet.BabelNetInterface;
 import oeg.easytvannotator.nlp.NLPInterface;
 import org.apache.log4j.Logger;
@@ -16,7 +17,7 @@ public class EasyTVInterface {
       
    
     
-    private JsonInput input;
+    private JsonSignLanguageAnnotationInput input;
     
     private NLPInterface Nlpinterface;
     
@@ -25,7 +26,7 @@ public class EasyTVInterface {
     
     static Logger logger = Logger.getLogger(EasyTVInterface.class);
     
-    //public EasyTVInterface(){}
+ 
     
     
     public EasyTVInterface(String ResourcesPath, String ContextPath, boolean Serviceweb){
@@ -46,6 +47,7 @@ public class EasyTVInterface {
         ESentence Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
         
         logger.info("ESentence created: NºTokens " + Esentence.ListTokens.size());
+        
         //BABELNET
         BabelInterface.callBabelNet(Esentence, Language);
         
@@ -68,7 +70,7 @@ public class EasyTVInterface {
         return Esentence;
     }
      
-    public ESentence processJson(JsonInput input) {
+    public ESentence processJson(JsonSignLanguageAnnotationInput input) {
 
         this.input=input;
         String Sentence = input.getVideo().getNls().trim();
@@ -90,7 +92,7 @@ public class EasyTVInterface {
     }
       
     
-    public ESentence annotateVideo(JsonInput input) {
+    public ESentence annotateVideo(JsonSignLanguageAnnotationInput input) {
 
         this.input=input;
         String Sentence = input.getVideo().getNls().trim();
@@ -109,7 +111,7 @@ public class EasyTVInterface {
 
     }
     
-    public ESentence annotateTranslateVideo(JsonInput input,String translationlang) {
+    public ESentence annotateTranslateVideo(JsonSignLanguageAnnotationInput input,String translationlang) {
 
         this.input=input;
         String Sentence = input.getVideo().getNls().trim();
@@ -130,11 +132,11 @@ public class EasyTVInterface {
     
   
 
-    public JsonInput getInput() {
+    public JsonSignLanguageAnnotationInput getInput() {
         return input;
     }
 
-    public void setInput(JsonInput input) {
+    public void setInput(JsonSignLanguageAnnotationInput input) {
         this.input = input;
     }
 

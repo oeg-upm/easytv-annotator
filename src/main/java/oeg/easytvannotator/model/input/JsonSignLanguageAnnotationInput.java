@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oeg.easytvannotator.model;
+package oeg.easytvannotator.model.input;
+
+import oeg.easytvannotator.model.SignLanguageVideo;
 
 /**
  *
  * @author Pablo
  */
-public class JsonInput {
+public class JsonSignLanguageAnnotationInput {
     
     private SignLanguageVideo video;
 

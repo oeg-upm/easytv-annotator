@@ -49,9 +49,9 @@ public class BabelNetDemo {
      
     public static void main(String [] args) throws IOException{
     
-     //testQuery();
+ 
      
-     callBabelNetWordPOS("maternity leave", Language.EN ,UniversalPOS.NOUN);
+     callBabelNetWordPOS("Los ingenieros eléctricos trabajan duro", Language.EN ,UniversalPOS.NOUN);
      
      //exampletranslation();
      //callBabelNetWord("anoche", Language.ES);

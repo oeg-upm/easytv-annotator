@@ -30,10 +30,10 @@ public class SignLanguageSegment {
     public String Language;
     public String NE;
     
-    public  List<BabelSynset> WordSynsets;
+    public List<BabelSynset> WordSynsets;
     public List<BabelNetSynset> LemmaSynsets;
     
-    public  List<String> WordBabelblySemanticAnnotations;
+    public List<String> WordBabelblySemanticAnnotations;
     public List<String> LemmaBabelblySemanticAnnotations;
     
     

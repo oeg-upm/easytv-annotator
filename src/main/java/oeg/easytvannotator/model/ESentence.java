@@ -5,6 +5,7 @@
  */
 package oeg.easytvannotator.model;
 
+import oeg.easytvannotator.model.input.JsonSignLanguageAnnotationInput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class ESentence {
     
     }
 
-    public void associateVideos(JsonInput input) {
+    public void associateVideos(JsonSignLanguageAnnotationInput input) {
         
         for(EToken tok: ListTokens){
             
