@@ -15,12 +15,11 @@ import java.util.List;
  */
 public class ESentence {
     
-    
-    public List <EToken> ListTokens;
-    
     public String OriginalText;
     public String LematizedText;
+    public List <EToken> ListTokens;
     
+  
     public ESentence(){
         ListTokens=new ArrayList();
     }

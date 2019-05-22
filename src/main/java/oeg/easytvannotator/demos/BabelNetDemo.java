@@ -51,7 +51,7 @@ public class BabelNetDemo {
     
  
      
-     callBabelNetWordPOS("Los ingenieros eléctricos trabajan duro", Language.EN ,UniversalPOS.NOUN);
+     callBabelNetWordPOS("Engineering", Language.EN ,UniversalPOS.NOUN);
      
      //exampletranslation();
      //callBabelNetWord("anoche", Language.ES);

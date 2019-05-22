@@ -15,6 +15,8 @@ public class BabelPosInterface {
       
     public static UniversalPOS getBabelPOS(String pos, String Lang){
      
+        Lang=Lang.toUpperCase();
+        
         if (pos.startsWith("V")) {
             
             if(pos.startsWith("VA")){

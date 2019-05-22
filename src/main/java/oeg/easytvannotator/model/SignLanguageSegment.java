@@ -30,17 +30,22 @@ public class SignLanguageSegment {
     public String Language;
     public String NE;
     
-    public List<BabelSynset> WordSynsets;
+    //public List<BabelSynset> WordSynsets;
     public List<BabelNetSynset> LemmaSynsets;
+    public List<BabelNetSynset> Synsets;
     
     public List<String> WordBabelblySemanticAnnotations;
     public List<String> LemmaBabelblySemanticAnnotations;
     
+    public List<EToken> ListTokens;
+    
     
     public SignLanguageSegment(){
     
-        WordSynsets=new ArrayList();
+        Synsets=new ArrayList();
         LemmaSynsets=new ArrayList();
+        ListTokens=new ArrayList();
+        
     }
     
     public String getOrder() {
@@ -123,13 +128,7 @@ public class SignLanguageSegment {
         this.NE = NE;
     }
 
-    public List<BabelSynset> getWordSynsets() {
-        return WordSynsets;
-    }
-
-    public void setWordSynsets(List<BabelSynset> WordSynsets) {
-        this.WordSynsets = WordSynsets;
-    }
+   
 
     public List<BabelNetSynset> getLemmaSynsets() {
         return LemmaSynsets;
@@ -155,6 +154,22 @@ public class SignLanguageSegment {
         this.LemmaBabelblySemanticAnnotations = LemmaBabelblySemanticAnnotations;
     }
 
+    public List<BabelNetSynset> getSynsets() {
+        return Synsets;
+    }
+
+    public void setSynsets(List<BabelNetSynset> Synsets) {
+        this.Synsets = Synsets;
+    }
+
+    public List<EToken> getListTokens() {
+        return ListTokens;
+    }
+
+    public void setListTokens(List<EToken> ListTokens) {
+        this.ListTokens = ListTokens;
+    }
+
     
     public void copyTokenInformation(EToken tok) {
         
@@ -165,10 +180,48 @@ public class SignLanguageSegment {
         this.Stemm=tok.Stemm;
         this.Language=tok.Language;
         this.NE=tok.NE;
-        this.WordSynsets=tok.WordSynsets;
+       // this.WordSynsets=tok.WordSynsets;
         this.LemmaSynsets=tok.LemmaSynsets;
         
     
+    }
+
+    public void generateLingProperties() {
+        
+        
+        if( ListTokens.size()==1){
+            this.Lemma=ListTokens.get(0).Lemma;
+            this.POS=ListTokens.get(0).POS;
+        }
+        
+        if (ListTokens.size()>1){
+            
+            String Lemm="";
+            this.POS=ListTokens.get(0).POS;// JUST IN CASE
+            boolean NP=false;
+            boolean VP=false;
+            for(EToken tok: ListTokens){
+            
+                Lemm=Lemm+" "+tok.Lemma;
+                if(tok.POS.startsWith("N")){
+                    NP=true;
+                }
+                if(tok.POS.startsWith("V")){
+                    VP=true;
+                }
+            }
+            this.Lemma=Lemm.trim();
+            if(VP){
+               this.POS="VP";
+               return;
+            }
+            if(NP){
+               this.POS="NP";
+            }
+        
+        }
+        
+        
     }
 
 }

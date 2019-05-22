@@ -24,6 +24,8 @@ import it.uniroma1.lcl.jlt.Configuration;
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
+import oeg.easytvannotator.model.SignLanguageSegment;
+import oeg.easytvannotator.model.SignLanguageVideo;
 import org.apache.log4j.Logger;
 
 
@@ -215,6 +217,35 @@ public class BabelNetInterface {
         }
 
     }
+    
+    
+    public void annotateVideo(SignLanguageVideo Video) {
+
+        Language Langua = BabelLangInterface.getLangType(Video.getLanguage());
+
+        // IDEA: TO PASS FIRST TO BABELFY 
+        // Go through segments
+        for (SignLanguageSegment Seg : Video.getSegments()) {
+
+            for (EToken token : Seg.ListTokens) {
+
+                String StanPos = token.POS.toUpperCase();
+                UniversalPOS Babelpos = BabelPosInterface.getBabelPOS(StanPos, Video.getLanguage());
+
+                if (Babelpos != null) {
+                    //token.WordSynsets = callBabelNetWordPOS(token.Word, Langua, Babelpos);
+                    token.Synsets = callBabelNetWordPOS(token.Lemma, Langua, Babelpos);
+                    token.cleanSynsets();
+
+                } else {
+                    logger.info("No BabelNet search for :" + token.Word + "  " + token.POS);
+                }
+
+            }
+
+        }
+
+    }
 
     
     public void callTranslationBabelNet(ESentence Sentence, String InputLang,String OutputLang) {
@@ -262,6 +293,40 @@ public class BabelNetInterface {
        return lis;
         
     
+    }
+    
+    
+    public void processSegments(SignLanguageVideo Video) {
+
+        
+        Language Langua = BabelLangInterface.getLangType(Video.getLanguage());
+
+        for (SignLanguageSegment seg: Video.getSegments()){
+        
+            
+            for (EToken token : seg.ListTokens) {
+
+            String StanPos = token.POS.toUpperCase();
+            UniversalPOS Babelpos = BabelPosInterface.getBabelPOS(StanPos, Video.getLanguage());
+
+            if (Babelpos != null) {
+               
+                token.LemmaSynsets = callBabelNetWordPOS(token.Lemma, Langua, Babelpos);
+                token.cleanSynsets();
+
+            } else {
+                logger.info("No BabelNet search for :" + token.Word + "  " + token.POS);
+            }
+
+        }
+            
+            
+            
+        
+        }
+        
+        
+
     }
  
 

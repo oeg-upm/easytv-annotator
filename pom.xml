@@ -321,22 +321,7 @@
 
     </dependencies>
     
-    <!--build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.5</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>oeg.easytranslator.Execution</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build-->
+
     
       <build>
           <pluginManagement>
@@ -404,6 +389,8 @@
                     <outputDirectory>${project.basedir}/dist</outputDirectory>
                 </configuration>
             </plugin>
+            
+            
              <!-- INSTALL DEPENDENCIES -->
          <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

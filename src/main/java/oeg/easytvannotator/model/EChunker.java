@@ -11,4 +11,6 @@ package oeg.easytvannotator.model;
  */
 public class EChunker {
     
+    private static void lestsTry(){}
+    
 }

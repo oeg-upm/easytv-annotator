@@ -27,6 +27,10 @@ public class EToken {
     public String Language;
     public String NE;
     
+    
+    public  List<BabelNetSynset> Synsets;
+    
+    //to remove
     public  List<BabelSynset> WordSynsets;
     public List<BabelNetSynset> LemmaSynsets;
     

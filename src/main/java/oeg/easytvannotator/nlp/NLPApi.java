@@ -13,6 +13,6 @@ import oeg.easytvannotator.model.ESentence;
  */
 public interface NLPApi {
     
-    public abstract   ESentence parseSentence(String Sentence, String Lang);
+    public abstract ESentence parseSentence(String Sentence, String Lang);
     
 }

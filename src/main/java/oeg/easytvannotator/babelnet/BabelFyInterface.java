@@ -107,6 +107,40 @@ public class BabelFyInterface {
 
         
     }
+      
+      
+       public static void processSimpleString(String s, String lang){
+       
+        String inputText = s;
+        Language Lang= BabelLangInterface.getLangType(lang);
+        
+        BabelfyParameters bp = new BabelfyParameters();
+        
+        bp.setAnnotationResource(BabelfyParameters.SemanticAnnotationResource.BN);
+        bp.setMCS(BabelfyParameters.MCS.ON_WITH_STOPWORDS);
+        //bp.setMCS(BabelfyParameters.MCS.ON);
+        bp.setScoredCandidates(BabelfyParameters.ScoredCandidates.TOP);
+        bp.setMatchingType(BabelfyParameters.MatchingType.PARTIAL_MATCHING);
+        bp.setPoStaggingOptions(BabelfyParameters.PosTaggingOptions.STANDARD);
+        bp.setAnnotationType(BabelfyParameters.SemanticAnnotationType.ALL);
+        
+        Babelfy bfy = new Babelfy(bp);
+        List<SemanticAnnotation> bfyAnnotations = bfy.babelfy(inputText, Lang);
+        
+        //bfyAnnotations is the result of Babelfy.babelfy() call
+        for (SemanticAnnotation annotation : bfyAnnotations) {
+            //splitting the input text using the CharOffsetFragment start and end anchors
+            String frag = inputText.substring(annotation.getCharOffsetFragment().getStart(),
+                    annotation.getCharOffsetFragment().getEnd() + 1);
+            System.out.println(frag + "\t" + annotation.getBabelSynsetID());
+            System.out.println("\t" + annotation.getBabelNetURL());
+            System.out.println("\t" + annotation.getDBpediaURL());
+            System.out.println("\t" + annotation.getSource());
+        }
+       
+       
+       
+       }
 
     
 }

@@ -26,8 +26,7 @@ public class SignLanguageVideoAnnotator {
     private NLPInterface Nlpinterface;
     
     private BabelNetInterface BabelInterface;
-    
-    
+        
     private BabelFyInterface  BabelFyInterface;
     
     
@@ -61,11 +60,16 @@ public class SignLanguageVideoAnnotator {
         // Create E SENTENCE
         ESentence Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
         
-        //BABELNET
-        BabelInterface.callBabelNet(Esentence, Language);
+        // Add tokens
+        Video.associateETokensToSegments(Esentence);
+        
+        //Annotate 
+        BabelInterface.annotateVideo(Video);
 
+        Video.associateSynsetsToSegments();
+        
+        
         // Associate Videos
-        Esentence.associateVideos(Input);
         return Esentence;
 
     }

@@ -69,7 +69,49 @@ public class SignLanguageVideo {
         this.segments = segments;
     }
 
+    public void associateETokensToSegments(ESentence Sentence){
     
+       
+    
+       
+        for(SignLanguageSegment seg: getSegments()){
+                
+            String text= seg.getContent().toLowerCase();
+            
+                for(EToken tok: Sentence.ListTokens){
+            
+                    if(text.contains(tok.Word.toLowerCase())){
+                        seg.ListTokens.add(tok);
+                        
+                    }
+                    
+                }
+              
+                
+            }
+    
+    
+    
+    }
+    
+    
+    public void associateSynsetsToSegments(){
+    
+         for(SignLanguageSegment seg: getSegments()){
+
+                for(EToken tok: seg.ListTokens){
+            
+                    seg.getSynsets().addAll(tok.Synsets);
+                    
+                    seg.generateLingProperties();
+                }
+              
+                
+            }
+    
+        
+    
+    }
 
     
 
