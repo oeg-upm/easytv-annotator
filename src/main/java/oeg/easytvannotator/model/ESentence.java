@@ -5,7 +5,6 @@
  */
 package oeg.easytvannotator.model;
 
-import oeg.easytvannotator.model.input.JsonSignLanguageAnnotationInput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +30,11 @@ public class ESentence {
     
     }
 
-    public void associateVideos(JsonSignLanguageAnnotationInput input) {
+    public void associateVideos(SignLanguageVideo vid) {
         
         for(EToken tok: ListTokens){
             
-            for(SignLanguageSegment seg:input.getVideo().getSegments()){
+            for(SignLanguageSegment seg:vid.getSegments()){
                 
                 if(tok.Word.equals(seg.getContent())){
                    // tok.copyVideoInforamtion(seg);

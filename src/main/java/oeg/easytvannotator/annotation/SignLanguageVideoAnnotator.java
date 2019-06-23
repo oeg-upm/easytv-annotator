@@ -10,7 +10,6 @@ import oeg.easytvannotator.babelnet.BabelNetInterface;
 import oeg.easytvannotator.model.ESentence;
 import oeg.easytvannotator.model.EasyTVInterface;
 import oeg.easytvannotator.model.SignLanguageVideo;
-import oeg.easytvannotator.model.input.JsonSignLanguageAnnotationInput;
 import oeg.easytvannotator.nlp.NLPInterface;
 import org.apache.log4j.Logger;
 
@@ -48,12 +47,14 @@ public class SignLanguageVideoAnnotator {
     
 
     
-    public ESentence annotateSignLanguageVideo(JsonSignLanguageAnnotationInput Input) {
+    public ESentence annotateSignLanguageVideo(SignLanguageVideo Video) {
 
         
-        SignLanguageVideo Video= Input.getVideo();
-        String Sentence = Input.getVideo().getNls().trim();
-        String Language= Input.getVideo().getLanguage();
+        //SignLanguageVideo Video= Input.getVideo();
+        Video.fillInfoOfWords();
+        
+        String Sentence = Video.getNls().trim();
+        String Language=  Video.getLanguage();
 
         logger.info("Recieved: " + Sentence + ". Lang:" + Language);
      

@@ -52,6 +52,7 @@ public class EToken {
         this.Language=Language;
         this.NE="O";
         
+        Synsets=new ArrayList();
         WordSynsets=new ArrayList();
         LemmaSynsets=new ArrayList();
         WordBabelblySemanticAnnotations=new ArrayList();

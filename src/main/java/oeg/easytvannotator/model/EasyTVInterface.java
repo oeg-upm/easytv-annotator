@@ -5,7 +5,6 @@
  */
 package oeg.easytvannotator.model;
 
-import oeg.easytvannotator.model.input.JsonSignLanguageAnnotationInput;
 import oeg.easytvannotator.babelnet.BabelNetInterface;
 import oeg.easytvannotator.nlp.NLPInterface;
 import org.apache.log4j.Logger;
@@ -17,7 +16,7 @@ public class EasyTVInterface {
       
    
     
-    private JsonSignLanguageAnnotationInput input;
+    private SignLanguageVideo input;
     
     private NLPInterface Nlpinterface;
     
@@ -70,11 +69,11 @@ public class EasyTVInterface {
         return Esentence;
     }
      
-    public ESentence processJson(JsonSignLanguageAnnotationInput input) {
+    public ESentence processJson(SignLanguageVideo input) {
 
         this.input=input;
-        String Sentence = input.getVideo().getNls().trim();
-        String Language=input.getVideo().getLanguage();
+        String Sentence = input.getNls().trim();
+        String Language=input.getLanguage();
 
         logger.info("Recieved: " + Sentence + "  Lang:" + Language);
      
@@ -92,11 +91,11 @@ public class EasyTVInterface {
     }
       
     
-    public ESentence annotateVideo(JsonSignLanguageAnnotationInput input) {
+    public ESentence annotateVideo(SignLanguageVideo input) {
 
         this.input=input;
-        String Sentence = input.getVideo().getNls().trim();
-        String Language=input.getVideo().getLanguage();
+        String Sentence = input.getNls().trim();
+        String Language=input.getLanguage();
 
         logger.info("Recieved: " + Sentence + "  Lang:" + Language);
      
@@ -111,11 +110,11 @@ public class EasyTVInterface {
 
     }
     
-    public ESentence annotateTranslateVideo(JsonSignLanguageAnnotationInput input,String translationlang) {
+    public ESentence annotateTranslateVideo(SignLanguageVideo input,String translationlang) {
 
         this.input=input;
-        String Sentence = input.getVideo().getNls().trim();
-        String Language=input.getVideo().getLanguage();
+        String Sentence = input.getNls().trim();
+        String Language=input.getLanguage();
 
         logger.info("Recieved: " + Sentence + "  Lang:" + Language +" Translation: "+translationlang);
      
@@ -132,11 +131,11 @@ public class EasyTVInterface {
     
   
 
-    public JsonSignLanguageAnnotationInput getInput() {
+    public SignLanguageVideo getInput() {
         return input;
     }
 
-    public void setInput(JsonSignLanguageAnnotationInput input) {
+    public void setInput(SignLanguageVideo input) {
         this.input = input;
     }
 

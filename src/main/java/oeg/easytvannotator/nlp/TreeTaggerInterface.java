@@ -45,7 +45,7 @@ public class TreeTaggerInterface implements NLPApi{
     
     public void process(String Path,String Text){
     
-         TreeTaggerDir= new File(Path+"resources/TreeTagger");
+         TreeTaggerDir= new File(Path+"TreeTagger");
          
         try {
             createTreeTaggerInput( Text );

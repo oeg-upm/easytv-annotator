@@ -167,13 +167,13 @@ public class ItalianIxaInterface implements NLPApi{
             String hardParagraph; //Do not segment paragraphs. Ever.
             
             
-            PosModel              = new File(Path+"resources/models/ud-morph-models-1.5.0/it/it-pos-perceptron-autodict01-ud.bin").getAbsolutePath();
-            lemmatizerModel    = new File(Path+"resources/models/ud-morph-models-1.5.0/it/it-lemma-perceptron-ud.bin").getAbsolutePath();
+            PosModel              = new File(Path+"Ixa/models/ud-morph-models-1.5.0/it/it-pos-perceptron-autodict01-ud.bin").getAbsolutePath();
+            lemmatizerModel    = new File(Path+"Ixa/models/ud-morph-models-1.5.0/it/it-lemma-perceptron-ud.bin").getAbsolutePath();
             language           = "it";
             kafVersion         = "1.5.0";
             
             multiwords         = "false"; //true
-            dictag             = new File(Path+"resources/models/tag").getAbsolutePath();
+            dictag             = new File(Path+"Ixa/models/tag").getAbsolutePath();
             normalize          = "true";
             untokenizable      = "false"; // false
             hardParagraph      = "false";
@@ -203,9 +203,9 @@ public class ItalianIxaInterface implements NLPApi{
             // NER
             
             
-            NERModel = new File(Path+"resources/models/nerc-models-1.5.4/it/it-clusters-evalita09.bin").getAbsolutePath();
+            NERModel = new File(Path+"Ixa/models/nerc-models-1.5.4/it/it-clusters-evalita09.bin").getAbsolutePath();
             language = "it";
-            dictag = new File("resources/models/tag").getAbsolutePath();
+            dictag = new File("Ixa/models/tag").getAbsolutePath();
             
             
             

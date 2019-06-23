@@ -5,6 +5,7 @@
  */
 package oeg.easytvannotator.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.uniroma1.lcl.babelnet.BabelSynset;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,21 +23,33 @@ public class SignLanguageSegment {
     private String content;
     
     
-    
+    @JsonIgnore
     public String Word;
+    @JsonIgnore
     public String POS;
+    @JsonIgnore
     public String Lemma;
+    
+    @JsonIgnore
     public String Stemm;
+    
+    @JsonIgnore
     public String Language;
+    
+    @JsonIgnore
     public String NE;
     
     //public List<BabelSynset> WordSynsets;
+    @JsonIgnore
     public List<BabelNetSynset> LemmaSynsets;
+    @JsonIgnore
     public List<BabelNetSynset> Synsets;
-    
+    @JsonIgnore
     public List<String> WordBabelblySemanticAnnotations;
-    public List<String> LemmaBabelblySemanticAnnotations;
     
+    @JsonIgnore
+    public List<String> LemmaBabelblySemanticAnnotations;
+    @JsonIgnore
     public List<EToken> ListTokens;
     
     
@@ -129,23 +142,25 @@ public class SignLanguageSegment {
     }
 
    
-
+    @JsonIgnore
     public List<BabelNetSynset> getLemmaSynsets() {
         return LemmaSynsets;
     }
-
+    
     public void setLemmaSynsets(List<BabelNetSynset> LemmaSynsets) {
         this.LemmaSynsets = LemmaSynsets;
     }
 
+    @JsonIgnore
     public List<String> getWordBabelblySemanticAnnotations() {
         return WordBabelblySemanticAnnotations;
     }
-
+    
     public void setWordBabelblySemanticAnnotations(List<String> WordBabelblySemanticAnnotations) {
         this.WordBabelblySemanticAnnotations = WordBabelblySemanticAnnotations;
     }
 
+    @JsonIgnore
     public List<String> getLemmaBabelblySemanticAnnotations() {
         return LemmaBabelblySemanticAnnotations;
     }
@@ -154,6 +169,7 @@ public class SignLanguageSegment {
         this.LemmaBabelblySemanticAnnotations = LemmaBabelblySemanticAnnotations;
     }
 
+    @JsonIgnore
     public List<BabelNetSynset> getSynsets() {
         return Synsets;
     }
@@ -161,7 +177,8 @@ public class SignLanguageSegment {
     public void setSynsets(List<BabelNetSynset> Synsets) {
         this.Synsets = Synsets;
     }
-
+    
+    @JsonIgnore
     public List<EToken> getListTokens() {
         return ListTokens;
     }

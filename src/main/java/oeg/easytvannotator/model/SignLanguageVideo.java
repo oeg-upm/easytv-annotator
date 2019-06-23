@@ -69,6 +69,20 @@ public class SignLanguageVideo {
         this.segments = segments;
     }
 
+    public void fillInfoOfWords(){
+    
+        for(SignLanguageSegment seg : this.getSegments()){
+        
+           
+            seg.setWord(seg.getContent());
+            seg.setLanguage(this.getLanguage());
+        
+        
+        }
+    
+    }
+    
+    
     public void associateETokensToSegments(ESentence Sentence){
     
        

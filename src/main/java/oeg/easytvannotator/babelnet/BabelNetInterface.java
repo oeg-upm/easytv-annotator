@@ -62,11 +62,11 @@ public class BabelNetInterface {
         if (serviceweb) {
             // context.getRealPath("/") 
             Configuration jltConfiguration = Configuration.getInstance();
-            jltConfiguration.setConfigurationFile(new File(ContextPath + "WEB-INF/config/jlt.properties"));
+            jltConfiguration.setConfigurationFile(new File(ContextPath + "config/jlt.properties"));
 
             BabelNetConfiguration bnconf = BabelNetConfiguration.getInstance();
-            bnconf.setConfigurationFile(new File(ContextPath + "/WEB-INF/config/babelnet.properties"));
-            bnconf.setBasePath(ContextPath + "/WEB-INF/");
+            bnconf.setConfigurationFile(new File(ContextPath + "config/babelnet.properties"));
+            bnconf.setBasePath(ContextPath ); //+ "/WEB-INF/"
             //BabelNet bn =  BabelNet.getInstance();
             bnInstance = BabelNet.getInstance();
             return;
