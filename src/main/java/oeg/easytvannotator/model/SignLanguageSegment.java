@@ -5,6 +5,7 @@
  */
 package oeg.easytvannotator.model;
 
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.uniroma1.lcl.babelnet.BabelSynset;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class SignLanguageSegment {
     private String start;
     private String end;
     private String content;
+    
     
     
     @JsonIgnore
