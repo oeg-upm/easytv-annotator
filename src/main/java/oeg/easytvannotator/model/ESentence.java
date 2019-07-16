@@ -20,7 +20,9 @@ public class ESentence {
     
   
     public ESentence(){
+        
         ListTokens=new ArrayList();
+        
     }
     
     
@@ -44,15 +46,12 @@ public class ESentence {
             }
             
         }
-        
      }
     
     
      public String print(){
      
-     
           System.out.println("Sentence: " + this.OriginalText);
-
           String res="";
             for (EToken token : this.ListTokens) {
 

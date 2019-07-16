@@ -103,12 +103,6 @@ public class TreeTaggerInterface implements NLPApi{
         Process pro = Runtime.getRuntime().exec("  \""+bat+"\" "+Input+" "+Output,null,new File(TreeTaggerDir.getAbsolutePath()));
 
         
-        /*
-        String Input= TreeTaggerDir.getAbsolutePath()+"/result/Input.txt";
-        String Output=  TreeTaggerDir.getAbsolutePath()+"/result/Output.txt";   
-        Process pro = Runtime.getRuntime().exec(bat+" "+Input+" "+Output, null,new File(TreeTaggerDir.getAbsolutePath()));
-        */
-        
        
         BufferedReader in = new BufferedReader(new InputStreamReader(pro.getErrorStream()));
         String line;
@@ -200,7 +194,7 @@ public class TreeTaggerInterface implements NLPApi{
     public ESentence parseSentence(String Sentence, String Language) {
         
         
-         TreeTaggerDir= new File(Path+"resources/TreeTagger");
+         TreeTaggerDir= new File(Path+"TreeTagger");
          
         try {
             createTreeTaggerInput( Sentence );
