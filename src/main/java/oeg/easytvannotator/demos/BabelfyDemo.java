@@ -26,7 +26,7 @@ public class BabelfyDemo {
     
        public static void main(String[] args) {
 
-        String inputText = "colleage is on maternity leave, they may";
+        String inputText = "calore";
         BabelfyConstraints constraints = new BabelfyConstraints();
         SemanticAnnotation a = new SemanticAnnotation(new TokenOffsetFragment(0, 0), 
                 "bn:03083790n","http://dbpedia.org/resource/BabelNet", Source.BABELFY);
@@ -36,7 +36,7 @@ public class BabelfyDemo {
         bp.setMCS(MCS.ON_WITH_STOPWORDS);
         bp.setScoredCandidates(ScoredCandidates.TOP);
         Babelfy bfy = new Babelfy(bp);
-        List<SemanticAnnotation> bfyAnnotations = bfy.babelfy(inputText, Language.EN, constraints);
+        List<SemanticAnnotation> bfyAnnotations = bfy.babelfy(inputText, Language.IT, constraints);
         
         //bfyAnnotations is the result of Babelfy.babelfy() call
         for (SemanticAnnotation annotation : bfyAnnotations) {

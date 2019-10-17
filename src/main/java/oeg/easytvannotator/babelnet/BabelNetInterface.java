@@ -67,7 +67,7 @@ public class BabelNetInterface {
             BabelNetConfiguration bnconf = BabelNetConfiguration.getInstance();
             bnconf.setConfigurationFile(new File(ContextPath + "config/babelnet.properties"));
             bnconf.setBasePath(ContextPath ); //+ "/WEB-INF/"
-            //BabelNet bn =  BabelNet.getInstance();
+           
             bnInstance = BabelNet.getInstance();
             return;
 
