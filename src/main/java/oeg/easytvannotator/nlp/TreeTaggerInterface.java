@@ -39,6 +39,8 @@ public class TreeTaggerInterface implements NLPApi{
         Path=path;
         
         batFile=Language;
+        
+        System.out.println("Path:: "+Path);
         //catalan
     
     }
@@ -54,6 +56,7 @@ public class TreeTaggerInterface implements NLPApi{
             //SystemUtils.IS_OS_LINUX  SystemUtils.IS_OS_WINDOWS
             if(SystemUtils.IS_OS_WINDOWS){
                 logger.info("TreeTagger Under Windows");
+                System.out.println("TreeTagger Under Windows");
                 sendCommandWindows() ;
             }
             
@@ -61,6 +64,7 @@ public class TreeTaggerInterface implements NLPApi{
             if(SystemUtils.IS_OS_LINUX){
                 
                 logger.info("TreeTagger Under Linux");
+                System.out.println("TreeTagger Under Linux");
                 sendCommandLinux() ;
             
             }
@@ -129,6 +133,7 @@ public class TreeTaggerInterface implements NLPApi{
         String Output=  TreeTaggerDir.getAbsolutePath()+"/result/Output.txt";
         
         logger.info("Executing command:   \""+bat+"\" "+Input+" "+Output);
+        System.out.println("Executing command:   \""+bat+"\" "+Input+" "+Output);
         //Process pro = Runtime.getRuntime().exec("   \""+bat+"\" "+Input+" "+Output);
         //Process pro = Runtime.getRuntime().exec("ls -la", null,new File("./src"));
        
@@ -139,6 +144,7 @@ public class TreeTaggerInterface implements NLPApi{
         while ((line = in.readLine()) != null) {
           
              logger.info("TreeTagger output:"+line);
+             System.out.println("TreeTagger output:"+line);
         }
         pro.waitFor();
         
@@ -176,14 +182,17 @@ public class TreeTaggerInterface implements NLPApi{
           
             esentence.addEToken(word, pos, lem, "",Lang);
             LemmaSentence.append(lem+" ");
-            //System.out.println(line);
+            System.out.println(line);
             
         }
         esentence.OriginalText=Text;
         esentence.LematizedText= LemmaSentence.toString().trim();
         Buffer.close();
         
+        
         logger.info("Reading output file finished");
+        System.out.println("Reading output file finished");
+        
         return esentence;
 
     }
