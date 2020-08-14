@@ -8,7 +8,6 @@ package oeg.easytvannotator.annotation;
 import oeg.easytvannotator.babelnet.BabelFyInterface;
 import oeg.easytvannotator.babelnet.BabelNetInterface;
 import oeg.easytvannotator.model.ESentence;
-import oeg.easytvannotator.model.EasyTVInterface;
 import oeg.easytvannotator.model.SignLanguageVideo;
 import oeg.easytvannotator.nlp.NLPInterface;
 import org.apache.log4j.Logger;
@@ -29,7 +28,7 @@ public class SignLanguageVideoAnnotator {
     private BabelFyInterface  BabelFyInterface;
     
     
-    static Logger logger = Logger.getLogger(EasyTVInterface.class);
+    static Logger logger = Logger.getLogger(SignLanguageVideoAnnotator.class);
     
  
     
@@ -83,6 +82,24 @@ public class SignLanguageVideoAnnotator {
 
     public void setNlpinterface(NLPInterface Nlpinterface) {
         this.Nlpinterface = Nlpinterface;
+    }
+    
+    
+    
+    public ESentence procesTestSentence(String Language, String Sentence) {
+
+        Sentence = Sentence.trim();
+        logger.info("Recieved: " + Sentence + "  Lang:" + Language);
+
+        // Create E SENTENCE
+        ESentence Esentence = Nlpinterface.createESentence(Language.toLowerCase(), Sentence);
+        
+        logger.info("ESentence created: NºTokens " + Esentence.ListTokens.size());
+        
+        //BABELNET
+        BabelInterface.callBabelNet(Esentence, Language);
+        
+        return Esentence;
     }
     
 }

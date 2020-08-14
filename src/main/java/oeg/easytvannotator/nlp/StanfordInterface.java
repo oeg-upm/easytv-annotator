@@ -12,7 +12,6 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
 import java.util.List;
 import java.util.Properties;
-import oeg.easytvannotator.demos.Stemmer;
 import oeg.easytvannotator.model.ESentence;
 import org.apache.log4j.Logger;
 
@@ -71,7 +70,7 @@ public class StanfordInterface implements NLPApi {
         // a CoreMap is essentially a Map that uses class objects as keys and has values with custom types
         List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
 
-        Stemmer stemmer = new Stemmer();
+        
 
         StringBuffer tokenSentence = new StringBuffer();
         StringBuffer LemmaSentence = new StringBuffer();
@@ -80,9 +79,7 @@ public class StanfordInterface implements NLPApi {
 
             for (CoreLabel token : sentence.get(CoreAnnotations.TokensAnnotation.class)) {
 
-                token.set(CoreAnnotations.StemAnnotation.class, stemmer.stem(token.word()));
                 String word = token.get(CoreAnnotations.TextAnnotation.class);
-
                 String pos =  token.get(CoreAnnotations.PartOfSpeechAnnotation.class);
                 String lem =  token.get(CoreAnnotations.LemmaAnnotation.class);
                 String stem = token.get(CoreAnnotations.StemAnnotation.class);

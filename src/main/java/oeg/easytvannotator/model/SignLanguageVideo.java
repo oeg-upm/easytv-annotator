@@ -5,7 +5,6 @@
  */
 package oeg.easytvannotator.model;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**

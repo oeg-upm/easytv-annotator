@@ -41,7 +41,7 @@ public class EToken {
     public String Start;
     public String End;
     
-    
+    public EToken(){}
     
     public EToken (String word,String POS, String Lemma,String Stemm, String Language){
     

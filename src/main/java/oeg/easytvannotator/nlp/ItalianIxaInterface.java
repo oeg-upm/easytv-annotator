@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 import oeg.easytvannotator.model.ESentence;
-import oeg.easytvannotator.model.EasyTVInterface;
 import org.apache.log4j.Logger;
 
 /**
