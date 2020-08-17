@@ -1,8 +1,15 @@
-# easytv-annotator
+ # easytv-annotator
 Sign language annotator library for the EASYTV european project
 
 
 TRANSLATOR PROJECT
+
+## Prerequisites
+Project is linked to the easytv project resources: https://github.com/oeg-upm/easytv-resources
+
+It uses Perl for TreeTagger. Install utf8
+> perl -MCPAN -e shell
+> install utf8::all
 
 
 ## Installation
